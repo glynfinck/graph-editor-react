@@ -1,0 +1,19 @@
+.splitter {
+	-moz-transition: all 0.15s ease-in;
+	-o-transition: all 0.15s ease-in;
+	-webkit-transition: all 0.15s ease-in;
+	transition: all 0.15s ease-in;
+	background-color: #f1f1f1;
+	height: 100%;
+	text-align: center;
+	line-height: 100vh;
+	align-content: center;
+}
+
+.splitter:hover {
+	background-color: #e4e4e4;
+}
+
+.splitter:active {
+	background-color: #e4e4e4;
+}

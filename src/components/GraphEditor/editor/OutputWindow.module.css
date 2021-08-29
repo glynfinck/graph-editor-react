@@ -1,0 +1,18 @@
+.button-nav {
+	color: rgb(29, 29, 29);
+	background-color: #f1f1f1;
+	border-color: transparent;
+}
+
+.button-action {
+	color: rgb(29, 29, 29);
+	background-color: #f1f1f1;
+	border-color: transparent;
+}
+
+.text-area {
+	width: 100%;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+}

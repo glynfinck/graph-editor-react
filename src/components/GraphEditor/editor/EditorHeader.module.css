@@ -1,0 +1,44 @@
+.button-run {
+	-moz-transition: all 0.1s ease-in;
+	-o-transition: all 0.1s ease-in;
+	-webkit-transition: all 0.1s ease-in;
+	transition: all 0.1s ease-in;
+	color: rgb(93, 93, 93);
+	font-size: 14px;
+	border-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+/* Change the background color on mouse-over */
+.button-run:hover {
+	color: rgb(93, 93, 93);
+	border: 1px solid rgb(93, 93, 93);
+	border-radius: 4px;
+}
+
+.button-run:disabled {
+	cursor: not-allowed !important;
+	color: rgb(93, 93, 93);
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.button {
+	-moz-transition: all 0.1s ease-in;
+	-o-transition: all 0.1s ease-in;
+	-webkit-transition: all 0.1s ease-in;
+	transition: all 0.1s ease-in;
+	color: rgb(93, 93, 93);
+	font-size: 14px;
+	height: 30px;
+	border-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 0px 10px 0px 10px;
+	margin: 5px 0px 5px 0px;
+}
+
+.button:hover {
+	color: rgb(54, 54, 54);
+}

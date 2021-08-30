@@ -32,7 +32,7 @@ To activate the node with id "A" we would use the following command:
 g.activateNode("A")
 ```
 
-#### Activate Edge (`activateEdge(id)`)
+#### Activate Edge
 
 ##### `self.activateEdge(source_id, target_id)`
 
@@ -46,7 +46,7 @@ To activate the edge with a source node id of "A" and a target node id of "B" we
 g.activateEdge("A", "B")
 ```
 
-#### Get Neighbors of a Node (`getNeighbors(id)`)
+#### Get Neighbors of a Node
 
 This method
 

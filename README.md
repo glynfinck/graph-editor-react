@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Graph Editor Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This documents how to perform different actions on the `Graph()` Python class used for developing our algorithms.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+1. [Editor](#editor)
+   - [Graph Class](#graph-class)
+     - [Parameters](#constructor)
+     - [Methods](#methods)
+2. [Graph](#graph)
+   - [Creating Nodes](#creating-nodes)
+   - [Creating Edges](#creating-edges)
+   - [Deleting Nodes](#deleting-nodes)
+   - [Deleting Edges](#deleting-edges)
 
-### `npm start`
+## Editor
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Graph Class
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Activate Node
 
-### `npm test`
+##### `self.activateNode(id)`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Activating a node will turn its color to green. This can be used to track vistited nodes as you progress throughout your algorithm.
 
-### `npm run build`
+##### Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To activate the node with id "A" we would use the following command:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+g.activateNode("A")
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Activate Edge (`activateEdge(id)`)
 
-### `npm run eject`
+##### `self.activateEdge(source_id, target_id)`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Activating a edge will turn its color to green. This can be used to track vistited edges as you progress throughout your algorithm.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To activate the edge with a source node id of "A" and a target node id of "B" we would use the following command:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+g.activateEdge("A", "B")
+```
 
-## Learn More
+#### Get Neighbors of a Node (`getNeighbors(id)`)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This method
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Get All Nodes
 
-### Code Splitting
+#### Get All Edges
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Graph

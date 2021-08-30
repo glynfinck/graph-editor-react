@@ -86,6 +86,7 @@ We get the following output:
 {'C': {}, 'B': {}, 'D': {}}
 ```
 
+
 #### Get All Nodes
 
 ##### `getNodes()`
@@ -149,6 +150,12 @@ We get the following output:
 To create a node hold down `SHIFT` and then click on an empty area of the graph as shown above.
 
 ### Creating Edges
+
+<p align="center">
+  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/add-edge.gif?alt=media&token=75ee3e94-896f-42e5-8387-fb2bd61e3914">
+</p>
+
+To create an edge between two nodes hold down `SHIFT` and drag from the source node to the target node as shown above.
 
 ### Deleting Nodes
 

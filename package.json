@@ -27,6 +27,7 @@
 		"react-resize-detector": "^6.7.6",
 		"react-scripts": "4.0.3",
 		"react-split-pane": "^2.0.3",
+		"react-tooltip": "^4.2.21",
 		"rebass": "^4.0.7",
 		"redux": "^4.1.1",
 		"remark-gfm": "^2.0.0",

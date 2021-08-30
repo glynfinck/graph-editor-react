@@ -48,7 +48,6 @@ const EditorHeader = (props) => {
 				<Button color="var(--primary-text)" onClick={openHelpModalHandler}>
 					<HelpIcon />
 				</Button>
-				{/* <button onClick={openHelpModalHandler}></button> */}
 				<Link
 					href="https://github.com/glynfinck/graph-editor"
 					color="var(--primary-text)"

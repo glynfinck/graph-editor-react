@@ -16,6 +16,7 @@ This documents how to perform different actions on the `Graph()` Python class us
    - [Creating Edges](#creating-edges)
    - [Deleting Nodes](#deleting-nodes)
    - [Deleting Edges](#deleting-edges)
+3. [Dependencies](#dependencies)
 
 ## Editor
 
@@ -173,3 +174,13 @@ To delete nodes `CLICK` on the node you want to delete and press the `DELETE` th
 </p>
 
 To delete edges `CLICK` on the edge you want to delete and press the `DELETE` the key.
+
+## Dependencies
+
+- React Digraph: https://github.com/uber/react-digraph
+- Rebass: https://rebassjs.org/
+- React Splitter: https://github.com/GeoffCox/react-splitter
+- Monaco Editor: https://github.com/suren-atoyan/monaco-react
+- Material UI: https://material-ui.com/
+- Worker Loader: https://github.com/webpack-contrib/worker-loader
+- Pyodide: https://pyodide.org/en/stable/

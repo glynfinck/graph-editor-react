@@ -7,14 +7,19 @@ g = Graph(graphData)
 #                              #
 ################################
 
-## example usage below ##
-g.activateNode("A")
-g.activateEdge("A","B")
-g.activateNode("B")
-g.activateEdge("B","D")
-g.activateNode("D")
-g.activateEdge("D","A")
-g.activateNode("A")
-g.activateEdge("A","C")
-g.activateNode("C")
-g.activateEdge("C","D")
+## example (Depth First Search) ##
+
+visited = set() # Set to keep track of visited nodes.
+
+def dfs(visited, graph, node):
+    if node not in visited:
+        print (node)
+        visited.add(node)
+        # activate node when we add to visited
+        g.activateNode(node)
+        for neighbour in graph.getNeighbors(node):
+            # activate edge when we recurse
+            g.activateEdge(node, neighbour)
+            dfs(visited, graph, neighbour)
+
+dfs(visited, g, 'A')

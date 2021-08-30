@@ -6,6 +6,7 @@ import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import { useRef } from "react";
 import { animationSpeedDefault } from "../../../store/graph/graph";
 import { Flex, Text, Box, Button } from "rebass";
+import ReactTooltip from "react-tooltip";
 
 const GraphHeader = (props) => {
 	const dispatch = useDispatch();
@@ -33,9 +34,10 @@ const GraphHeader = (props) => {
 			alignContent="center"
 			alignItems="center"
 		>
-			<Text pr={3}>Animation Speed</Text>
 			<Box width="100px" mt="6px">
 				<Slider
+					data-tip
+					data-for="sim-speed-slider"
 					aria-labelledby="discrete-slider"
 					defaultValue={animationSpeedDefault}
 					step={10}
@@ -45,6 +47,14 @@ const GraphHeader = (props) => {
 					onChange={sliderChangedHandler}
 					ref={sliderRef}
 				/>
+				<ReactTooltip
+					id="sim-speed-slider"
+					type="dark"
+					effect="solid"
+					place="bottom"
+				>
+					<span>Simulation Speed</span>
+				</ReactTooltip>
 			</Box>
 			<Box mx="auto" />
 			<Box>
@@ -56,8 +66,16 @@ const GraphHeader = (props) => {
 					color="var(--primary-text)"
 					onClick={resetActivatedNodesHandler}
 				>
-					<RotateLeftIcon />
+					<RotateLeftIcon data-tip data-for="reset-activated-button" />
 				</Button>
+				<ReactTooltip
+					id="reset-activated-button"
+					type="dark"
+					effect="solid"
+					place="bottom"
+				>
+					<span>Reset Activated</span>
+				</ReactTooltip>
 			</Box>
 		</Flex>
 

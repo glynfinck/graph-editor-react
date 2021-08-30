@@ -9,30 +9,21 @@ import { Flex, Text, Box, Link, Button } from "rebass";
 
 const Help = () => {
 	return (
-		<Flex height="100px" flexDirection="column">
+		<Flex
+			height="100px"
+			flexDirection="row"
+			alignItems="center"
+			alignContent="center"
+		>
+			<Box mx="auto"></Box>
 			<Text>
-				Go to https://github.com/glynfinck/graph-editor for help on how to use.
-			</Text>
-			<Box my="auto"></Box>
-			<Flex flexDirection="row">
-				<Box mx="auto"></Box>
+				Go to{" "}
 				<Link href="https://github.com/glynfinck/graph-editor">
-					<Flex
-						height="50px"
-						width="100px"
-						backgroundColor="#24a0ED"
-						color="white"
-						alignItems="center"
-						alignContent="center"
-						textAlign="center"
-					>
-						<Text ml="10px">Github</Text>
-						<Box flexGrow="1">
-							<GitHubIcon />
-						</Box>
-					</Flex>
-				</Link>
-			</Flex>
+					https://github.com/glynfinck/graph-editor
+				</Link>{" "}
+				for help on how to use.
+			</Text>
+			<Box mx="auto"></Box>
 		</Flex>
 	);
 };

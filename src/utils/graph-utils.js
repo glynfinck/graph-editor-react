@@ -112,6 +112,5 @@ export const computeInitBBOX = (nodes, buffer = 100) => {
 		width: max_x + 2 * buffer - min_x,
 		height: max_y + 2 * buffer - min_y,
 	};
-	console.log(result);
 	return result;
 };

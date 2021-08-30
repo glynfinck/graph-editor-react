@@ -17,6 +17,9 @@ const editorSlice = createSlice({
 		setOutput(state, action) {
 			state.output = action.payload;
 		},
+		setIsEditorLoading(state, action) {
+			state.isEditorLoading = action.payload;
+		},
 	},
 });
 

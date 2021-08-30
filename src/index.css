@@ -5,6 +5,7 @@
 	--highlighted-node-color: lightgreen;
 	--run-code: green;
 	--run-code-hover: rgb(0, 92, 0);
+	--primary-text-disabled: #bdbdbd;
 }
 
 html,
@@ -14,7 +15,7 @@ body,
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: Roboto, sans-serif;
 }
 
 .node-text tspan {
@@ -44,10 +45,17 @@ header button {
 	border-color: transparent;
 }
 
-header button:hover {
+header button:hover,
+header a:hover {
 	color: var(--primary-text-hover);
 }
 
-header a:hover {
-	color: var(--primary-text-hover);
+header button:disabled,
+header a:disabled {
+	color: var(--primary-text-disabled);
+	cursor: not-allowed;
+}
+
+header svg:focus {
+	outline: none;
 }

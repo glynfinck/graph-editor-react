@@ -12,6 +12,7 @@ import { graphActions } from "../../../store/graph/graph";
 import OutputWindow from "./OutputWindow";
 import { Row, Col } from "react-bootstrap";
 import OutputHeader from "./OutputHeader";
+import { editorActions } from "../../../store/editor/editor";
 
 const loadPythonCode = (path) => {
 	const load = async () => {
@@ -137,13 +138,9 @@ const EditorWindow = (props) => {
 			setOutput((output) => {
 				return output + "\nReady!";
 			});
+			dispatch(editorActions.setIsEditorLoading(!isPyodideLoaded));
 		}
-	}, [isPyodideLoaded]);
-
-	useEffect(() => {
-		console.log(`Finished: ${compliationFinished}`);
-		console.log(`Success: ${compliationSuccess}\n`);
-	}, [compliationSuccess, compliationFinished]);
+	}, [isPyodideLoaded, dispatch]);
 
 	useEffect(() => {
 		let contextNodes = [];
@@ -189,8 +186,7 @@ const EditorWindow = (props) => {
 	};
 
 	const canRun = code !== "" && pythonCode !== "" && isPyodideLoaded;
-	console.log(width);
-	console.log(height);
+
 	return (
 		<Split
 			renderSplitter={() => <OutputHeader />}

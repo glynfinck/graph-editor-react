@@ -8,6 +8,7 @@ const initialGraphState = {
 	letterID: true,
 	compliationSuccess: false,
 	compliationFinished: false,
+	simulationStarted: false,
 	animationSpeed: animationSpeedDefault,
 	animating: false,
 	nodes: [
@@ -234,6 +235,7 @@ const graphSlice = createSlice({
 			state.animationSpeed = action.payload;
 		},
 		compliationStarted(state, action) {
+			state.simulationStarted = true;
 			state.compliationFinished = false;
 			state.compliationSuccess = false;
 		},
@@ -249,6 +251,7 @@ const graphSlice = createSlice({
 			state.animating = true;
 		},
 		finishAnimation(state, action) {
+			state.simulationStarted = false;
 			state.animating = false;
 		},
 		clearAnimation(state, action) {

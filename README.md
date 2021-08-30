@@ -6,8 +6,11 @@ This documents how to perform different actions on the `Graph()` Python class us
 
 1. [Editor](#editor)
    - [Graph Class](#graph-class)
-     - [Parameters](#constructor)
-     - [Methods](#methods)
+     - [Activate Node](#activate-node)
+     - [Activate Edge](#activate-node)
+     - [Get Neighbors of a Node](#get-neighbors-of-a-node)
+     - [Get All Nodes](#get-all-nodes)
+     - [Get All Edges](#get-all-nodes)
 2. [Graph](#graph)
    - [Creating Nodes](#creating-nodes)
    - [Creating Edges](#creating-edges)
@@ -47,6 +50,7 @@ Activating a edge will turn its color to green. This can be used to track vistit
 To activate the edge with a source node id of "A" and a target node id of "B" we would use the following command:
 
 ```
+g = Graph()
 g.activateEdge("A", "B")
 ```
 
@@ -58,10 +62,72 @@ Producing the following result in our graph:
 
 ##### `getNeighbors(id)`
 
-This
+Returns all neighbors for a node with `id`.
+
+##### Usage
+
+For the following graph and input:
+
+```
+g = Graph()
+neighbors = g.getNeighbors("A")
+print(neighbors)
+```
+
+![enter image description here](https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/get-neighbors.png?alt=media&token=083ab775-97fc-4387-8ca0-539c73c65676)
+
+We get the following output:
+
+```
+{'C': {}, 'B': {}, 'D': {}}
+```
 
 #### Get All Nodes
 
+##### `getNodes()`
+
+Returns all nodes in the graph.
+
+##### Usage
+
+For the following graph and input:
+
+```
+g = Graph()
+nodes = g.getNodes()
+print(nodes)
+```
+
+![enter image description here](https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/get-neighbors.png?alt=media&token=083ab775-97fc-4387-8ca0-539c73c65676)
+
+We get the following output:
+
+```
+[('A', {}), ('B', {}), ('C', {}), ('D', {})]
+```
+
 #### Get All Edges
+
+##### `getEdges()`
+
+Returns all edges in the graph.
+
+##### Usage
+
+For the following graph and input:
+
+```
+g = Graph()
+edges = g.getEdges()
+print(edges)
+```
+
+![enter image description here](https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/get-neighbors.png?alt=media&token=083ab775-97fc-4387-8ca0-539c73c65676)
+
+We get the following output:
+
+```
+[('A', 'C', {}), ('A', 'B', {}), ('A', 'D', {}), ('B', 'C', {}), ('B', 'D', {})]
+```
 
 ## Graph

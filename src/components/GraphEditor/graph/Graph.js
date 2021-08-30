@@ -74,7 +74,7 @@ const Graph = () => {
 				nodeTypes={NodeTypes}
 				nodeSubtypes={NodeSubtypes}
 				edgeTypes={EdgeTypes}
-				showGraphControls={false}
+				showGraphControls={true}
 				allowMultiselect={true} // true by default, set to false to disable multi select.
 				onCreateNode={onCreateNode}
 				onCreateEdge={onCreateEdge}

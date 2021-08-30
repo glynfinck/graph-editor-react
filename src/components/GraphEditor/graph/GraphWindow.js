@@ -10,12 +10,16 @@ import { Row, Col } from "react-bootstrap";
 
 const GraphWindow = (props) => {
 	return (
-    
 		<div className={classes["graph-window"]}>
 			<div>
 				<GraphHeader />
 			</div>
-			<div style={{ height: "100%", width: "100%" }}>
+			<div
+				style={{
+					height: "calc(100% - 30px)",
+					width: "100%",
+				}}
+			>
 				<Graph />
 			</div>
 		</div>

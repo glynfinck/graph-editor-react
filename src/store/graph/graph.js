@@ -244,6 +244,7 @@ const graphSlice = createSlice({
 			state.compliationSuccess = true;
 		},
 		compliationFailed(state, action) {
+			state.simulationStarted = false;
 			state.compliationFinished = true;
 			state.compliationSuccess = false;
 		},

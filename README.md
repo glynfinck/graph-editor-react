@@ -84,10 +84,10 @@ print(neighbors)
   <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/get-neighbors.png?alt=media&token=083ab775-97fc-4387-8ca0-539c73c65676">
 </p>
 We get the following output:
-
 ```
 {'C': {}, 'B': {}, 'D': {}}
 ```
+
 
 #### Get All Nodes
 
@@ -177,10 +177,21 @@ To delete edges `CLICK` on the edge you want to delete and press the `DELETE` th
 
 ## Dependencies
 
-- React Digraph: https://github.com/uber/react-digraph
+### Styling/Layout
+
 - Rebass: https://rebassjs.org/
 - React Splitter: https://github.com/GeoffCox/react-splitter
-- Monaco Editor: https://github.com/suren-atoyan/monaco-react
 - Material UI: https://material-ui.com/
+
+### Graph
+
+- React Digraph: https://github.com/uber/react-digraph
+
+### Editor
+
+- Monaco Editor: https://github.com/suren-atoyan/monaco-react
+
+### Python Webworker
+
 - Worker Loader: https://github.com/webpack-contrib/worker-loader
 - Pyodide: https://pyodide.org/en/stable/

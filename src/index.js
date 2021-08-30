@@ -6,15 +6,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
-import { ThemeProvider } from "theme-ui";
-import preset from "@rebass/preset";
 
 ReactDOM.render(
-	<ThemeProvider theme={preset}>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</ThemeProvider>,
+	<Provider store={store}>
+		<App />
+	</Provider>,
 	document.getElementById("root")
 );
 

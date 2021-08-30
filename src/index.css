@@ -1,3 +1,10 @@
+:root {
+	--primary: #f1f1f1;
+	--primary-text: #5d5d5d;
+	--primary-text-hover: #2e2e2e;
+	--highlighted-node-color: lightgreen;
+}
+
 html,
 body,
 #root {
@@ -13,9 +20,32 @@ body,
 }
 
 #activated {
-	fill: lightgreen;
+	fill: var(--highlighted-node-color);
 }
 
 #activatedEdge {
-	fill: lightgreen;
+	fill: var(--highlighted-node-color);
+}
+
+.splitter {
+	background-color: var(--primary);
+}
+
+header {
+	color: var(--primary-text);
+	background-color: var(--primary);
+}
+
+header button {
+	color: var(--primary-text);
+	background-color: var(--primary);
+	border-color: transparent;
+}
+
+header button:hover {
+	color: var(--primary-text-hover);
+}
+
+header a:hover {
+	color: var(--primary-text-hover);
 }

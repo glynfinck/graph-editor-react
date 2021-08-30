@@ -26,7 +26,13 @@ const GraphHeader = (props) => {
 	};
 
 	return (
-		<Flex px={2} color="rgb(63,63,63)" bg="#f1f1f1" alignItems="center">
+		<Flex
+			px={2}
+			as="header"
+			height="40px"
+			alignContent="center"
+			alignItems="center"
+		>
 			<Text pr={3}>Animation Speed</Text>
 			<Box width="100px" mt="6px">
 				<Slider
@@ -42,7 +48,7 @@ const GraphHeader = (props) => {
 			</Box>
 			<Box mx="auto" />
 			<Box>
-				<button className={classes.button} onClick={resetActivatedNodesHandler}>
+				<button onClick={resetActivatedNodesHandler}>
 					<RotateLeftIcon />
 				</button>
 			</Box>

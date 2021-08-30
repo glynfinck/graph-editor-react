@@ -17,7 +17,7 @@ function App() {
 
 	return (
 		<Fragment>
-			{true && (
+			{isHelpModalOpen && (
 				<Modal onClose={handleClose}>
 					<Help></Help>
 				</Modal>

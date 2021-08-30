@@ -1,6 +1,6 @@
 # Graph Editor Documentation
 
-This documents how to perform different actions on the `Graph()` Python class used for developing our algorithms.
+This documents explains how to use the [Graph Editor]() web application.
 
 ## Table of Contents
 
@@ -87,6 +87,7 @@ We get the following output:
 ```
 {'C': {}, 'B': {}, 'D': {}}
 ```
+
 
 #### Get All Nodes
 
@@ -181,7 +182,6 @@ To delete edges `CLICK` on the edge you want to delete and press the `DELETE` th
 - Rebass: https://rebassjs.org/
 - React Splitter: https://github.com/GeoffCox/react-splitter
 - Material UI: https://material-ui.com/
-- React Tooltip: https://wwayne.github.io/react-tooltip/
 
 ### Graph
 

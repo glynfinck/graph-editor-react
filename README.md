@@ -32,7 +32,11 @@ To activate the node with id "A" we would use the following command:
 g.activateNode("A")
 ```
 
-#### Activate Edge
+Producing the following result in our graph:
+
+![activated node](https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/activated-node.png?alt=media&token=030b3951-e8c6-4167-b2c2-87ad742248be)
+
+#### Activate Edge (`activateEdge(id)`)
 
 ##### `self.activateEdge(source_id, target_id)`
 
@@ -46,9 +50,15 @@ To activate the edge with a source node id of "A" and a target node id of "B" we
 g.activateEdge("A", "B")
 ```
 
+Producing the following result in our graph:
+
+![activated edge](https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/activated-edge.png?alt=media&token=517238df-9d91-4a6c-a351-1a4724804d59)
+
 #### Get Neighbors of a Node
 
-This method
+##### `getNeighbors(id)`
+
+This
 
 #### Get All Nodes
 

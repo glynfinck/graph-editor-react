@@ -78,3 +78,40 @@ export const arraysEqual = (a, b) => {
 	}
 	return true;
 };
+
+export const computeInitBBOX = (nodes, buffer = 100) => {
+	if (!nodes) {
+		return null;
+	}
+	if (nodes.length === 0) {
+		return null;
+	}
+	const N = nodes.length;
+	let min_x = nodes[0].x;
+	let min_y = nodes[0].y;
+	let max_x = nodes[0].x;
+	let max_y = nodes[0].y;
+	for (let i = 1; i < N; i++) {
+		const node = nodes[i];
+		if (node.x < min_x) {
+			min_x = node.x;
+		}
+		if (node.y < min_y) {
+			min_y = node.y;
+		}
+		if (node.x > max_x) {
+			max_x = node.x;
+		}
+		if (node.y > max_y) {
+			max_y = node.y;
+		}
+	}
+	const result = {
+		x: min_x - buffer,
+		y: min_y - buffer,
+		width: max_x + 2 * buffer - min_x,
+		height: max_y + 2 * buffer - min_y,
+	};
+	console.log(result);
+	return result;
+};

@@ -22,33 +22,31 @@ const EditorHeader = (props) => {
 	};
 
 	return (
-		<Flex
-			px={2}
-			as="header"
-			height="40px"
-			alignContent="center"
-			alignItems="center"
-		>
-			<Box>
-				<button
-					className={classes["button-run"]}
-					onClick={runPythonCode}
-					disabled={props.disabled}
-				>
-					<Flex alignContent="center" alignItems="center">
-						<Text>Run Code</Text>
-						<Box>
-							<PlayArrowIcon fontSize="small" className={classes.icon} />
-						</Box>
-					</Flex>
-				</button>
-			</Box>
+		<Flex px={2} as="header" height="40px" alignItems="center" textAlign>
+			<Button
+				pt="8px"
+				pb="4px"
+				pl="5px"
+				color="var(--primary-text)"
+				onClick={openHelpModalHandler}
+			>
+				<PlayArrowIcon />
+			</Button>
 			<Box mx="auto" />
 			<Box>
-				<Button color="var(--primary-text)" onClick={openHelpModalHandler}>
+				<Button
+					pt="8px"
+					pb="4px"
+					pl="5px"
+					color="var(--primary-text)"
+					onClick={openHelpModalHandler}
+				>
 					<HelpIcon />
 				</Button>
 				<Link
+					pt="8px"
+					pb="4px"
+					pl="5px"
 					href="https://github.com/glynfinck/graph-editor"
 					color="var(--primary-text)"
 				>

@@ -5,7 +5,7 @@ import { graphActions } from "../../../store/graph/graph";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import { useRef } from "react";
 import { animationSpeedDefault } from "../../../store/graph/graph";
-import { Flex, Text, Box } from "rebass";
+import { Flex, Text, Box, Button } from "rebass";
 
 const GraphHeader = (props) => {
 	const dispatch = useDispatch();
@@ -48,9 +48,16 @@ const GraphHeader = (props) => {
 			</Box>
 			<Box mx="auto" />
 			<Box>
-				<button onClick={resetActivatedNodesHandler}>
+				<Button
+					pt="8px"
+					pb="4px"
+					pl="5px"
+					pr="5px"
+					color="var(--primary-text)"
+					onClick={resetActivatedNodesHandler}
+				>
 					<RotateLeftIcon />
-				</button>
+				</Button>
 			</Box>
 		</Flex>
 

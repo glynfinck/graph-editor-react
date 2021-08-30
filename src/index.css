@@ -3,6 +3,8 @@
 	--primary-text: #5d5d5d;
 	--primary-text-hover: #2e2e2e;
 	--highlighted-node-color: lightgreen;
+	--run-code: green;
+	--run-code-hover: rgb(0, 92, 0);
 }
 
 html,

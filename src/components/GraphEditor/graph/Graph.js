@@ -10,6 +10,7 @@ import {
 } from "../../../store/graph/graph-types";
 import { graphActions } from "../../../store/graph/graph";
 import { useState } from "react";
+import { computeInitBBOX } from "../../../utils/graph-utils";
 
 const NODE_KEY = "id";
 
@@ -64,9 +65,12 @@ const Graph = () => {
 		disptach(graphActions.updateNode({ ...node }));
 	};
 
+	const initialBBOX = computeInitBBOX(nodes_copy, 200);
+
 	return (
 		<div className={classes.graph}>
 			<GraphView
+				initialBBox={initialBBOX}
 				nodeKey={NODE_KEY}
 				nodes={nodes_copy}
 				edges={edges}

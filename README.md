@@ -23,7 +23,7 @@ This documents how to perform different actions on the `Graph()` Python class us
 
 #### Activate Node
 
-##### `self.activateNode(id)`
+##### `activateNode(id)`
 
 Activating a node will turn its color to green. This can be used to track vistited nodes as you progress throughout your algorithm.
 
@@ -32,6 +32,7 @@ Activating a node will turn its color to green. This can be used to track vistit
 To activate the node with id "A" we would use the following command:
 
 ```
+g = Graph()
 g.activateNode("A")
 ```
 
@@ -41,9 +42,9 @@ Producing the following result in our graph:
   <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/activated-node.png?alt=media&token=030b3951-e8c6-4167-b2c2-87ad742248be">
 </p>
 
-#### Activate Edge (`activateEdge(id)`)
+#### Activate Edge
 
-##### `self.activateEdge(source_id, target_id)`
+##### `activateEdge(source_id, target_id)`
 
 Activating a edge will turn its color to green. This can be used to track vistited edges as you progress throughout your algorithm.
 
@@ -159,4 +160,16 @@ To create an edge between two nodes hold down `SHIFT` and drag from the source n
 
 ### Deleting Nodes
 
+<p align="center">
+  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/delete-node.gif?alt=media&token=3da7d0b8-5ff7-4169-bf9d-0d14dea8e4af">
+</p>
+
+To delete nodes `CLICK` on the node you want to delete and press the `DELETE` the key. Edges connected to the deleted node will automatically be deleted as well.
+
 ### Deleting Edges
+
+<p align="center">
+  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/delete-edge.gif?alt=media&token=0a94ca54-16d0-4e89-afeb-4cf42c30dc34">
+</p>
+
+To delete edges `CLICK` on the edge you want to delete and press the `DELETE` the key.

@@ -1,15 +1,16 @@
 import classes from "./Layout.module.css";
 import MainNavigation from "./MainNavigation";
+import { Flex, Box } from "rebass";
 
 const Layout = (props) => {
 	console.log(classes);
 	return (
-		<main className={classes.main}>
-			<header className={classes.header}>
+		<Flex flexDirection="column" height="100%" width="100%">
+			<Box height="50px">
 				<MainNavigation />
-			</header>
-			<content className={classes.content}>{props.children}</content>
-		</main>
+			</Box>
+			<Box flexGrow="1">{props.children}</Box>
+		</Flex>
 	);
 };
 

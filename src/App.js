@@ -6,6 +6,7 @@ import GraphEditor from "./components/GraphEditor/GraphEditor";
 import Modal from "./components/UI/Modal";
 import Help from "./components/Help/Help";
 import { uiActions } from "./store/ui/ui";
+import Layout from "./components/Layout/Layout";
 
 function App() {
 	const isHelpModalOpen = useSelector((state) => state.ui.isHelpModalOpen);
@@ -16,14 +17,14 @@ function App() {
 	};
 
 	return (
-		<Fragment>
+		<Layout>
 			{isHelpModalOpen && (
 				<Modal onClose={handleClose}>
 					<Help></Help>
 				</Modal>
 			)}
 			<GraphEditor />
-		</Fragment>
+		</Layout>
 	);
 }
 

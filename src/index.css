@@ -1,5 +1,6 @@
 :root {
 	--primary: #f1f1f1;
+	--secondary: #e0e0e0;
 	--primary-text: #5d5d5d;
 	--primary-text-hover: #2e2e2e;
 	--highlighted-node-color: lightgreen;
@@ -48,6 +49,7 @@ header button {
 header button:hover,
 header a:hover {
 	color: var(--primary-text-hover);
+	cursor: pointer;
 }
 
 header button:disabled,

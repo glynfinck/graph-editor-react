@@ -13,13 +13,6 @@ const authSlice = createSlice({
 		login(state, action) {
 			state.token = action.payload.token;
 			state.isLoggedIn = true;
-
-			// localStorage.setItem("token", action.payload.token);
-			// localStorage.setItem("expirationTime", action.payload.expirationTime);
-
-			// const remainingTime = calculateRemainingTime(expirationTime);
-
-			// logoutTimer = setTimeout(logoutHandler, remainingTime);
 		},
 		logout(state, action) {
 			state.token = "";

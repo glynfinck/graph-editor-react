@@ -7,6 +7,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import { Flex, Box, Link, Button } from "rebass";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/ui/ui";
+import { Select } from "@rebass/forms";
 
 import ReactTooltip from "react-tooltip";
 import { Fragment } from "react";
@@ -19,13 +20,10 @@ const EditorHeader = (props) => {
 		(state) => state.graph.simulationStarted
 	);
 	const isEditorLoading = useSelector((state) => state.editor.isEditorLoading);
+	const algorithms = useSelector((state) => state.editor.algorithms);
 
 	const runPythonCode = () => {
 		props.onRunPythonCode();
-	};
-
-	const openHelpModalHandler = () => {
-		dispatch(uiActions.openHelpModal());
 	};
 
 	let runCode = (
@@ -71,27 +69,33 @@ const EditorHeader = (props) => {
 		<Fragment>
 			<Flex px={2} as="header" height="40px" alignItems="center" textAlign>
 				{runCode}
+				<Select
+					id="algorithm"
+					name="algorithm"
+					defaultValue="DFS"
+					height="28px"
+					width="120px"
+					fontSize="15px"
+					px="auto"
+					p="5px 10px"
+					color="var(--primary-text)"
+					style={{ borderRadius: "5px" }}
+					data-tip
+					data-for="select-algorithm"
+				>
+					{algorithms.map((value, index, arr) => (
+						<option key={index}>{value.name}</option>
+					))}
+				</Select>
+				<ReactTooltip
+					id="select-algorithm"
+					type="dark"
+					effect="solid"
+					place="bottom"
+				>
+					<span>Algorithm</span>
+				</ReactTooltip>
 				<Box mx="auto" />
-				<Box>
-					<Button
-						pt="8px"
-						pb="4px"
-						pl="5px"
-						color="var(--primary-text)"
-						onClick={openHelpModalHandler}
-					>
-						<HelpIcon />
-					</Button>
-					<Link
-						pt="8px"
-						pb="4px"
-						pl="5px"
-						href="https://github.com/glynfinck/graph-editor"
-						color="var(--primary-text)"
-					>
-						<GitHubIcon />
-					</Link>
-				</Box>
 			</Flex>
 		</Fragment>
 	);

@@ -1,8 +1,10 @@
 import { Flex, Box, Button, Text, Link, Image } from "rebass";
 import SettingsIcon from "@material-ui/icons/Settings";
-import SaveIcon from "@material-ui/icons/Save";
+import HelpIcon from "@material-ui/icons/Help";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth/auth";
+import { uiActions } from "../../store/ui/ui";
 
 const MainNavigation = (props) => {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -10,6 +12,10 @@ const MainNavigation = (props) => {
 
 	const logoutHandler = () => {
 		dispatch(authActions.logout());
+	};
+
+	const openHelpModalHandler = () => {
+		dispatch(uiActions.openHelpModal());
 	};
 
 	return (
@@ -47,11 +53,18 @@ const MainNavigation = (props) => {
 				</Button>
 			)}
 			<Button px={2} color="var(--primary-text)">
-				<SaveIcon></SaveIcon>
+				<SettingsIcon />
 			</Button>
-			<Button px={2} color="var(--primary-text)">
-				<SettingsIcon></SettingsIcon>
+			<Button px={2} color="var(--primary-text)" onClick={openHelpModalHandler}>
+				<HelpIcon />
 			</Button>
+			<Link
+				px={2}
+				color="var(--primary-text)"
+				href="https://github.com/glynfinck/graph-editor"
+			>
+				<GitHubIcon />
+			</Link>
 		</Flex>
 	);
 };

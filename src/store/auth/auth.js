@@ -4,6 +4,7 @@ const initialAuthSlice = {
 	token: "",
 	isLoggedIn: true,
 	logoutTimer: null,
+	expirationTime: "",
 };
 
 const authSlice = createSlice({

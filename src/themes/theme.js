@@ -1,6 +1,4 @@
-import { Theme } from "theme-ui";
-
-export const theme = {
+const theme = {
 	space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
 	fonts: {
 		body:
@@ -108,6 +106,11 @@ export const theme = {
 		},
 		img: {
 			maxWidth: "100%",
-		},
+    },
+    input: {
+      
+    }
 	},
 };
+
+export default theme;

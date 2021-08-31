@@ -6,6 +6,7 @@
 	--highlighted-node-color: lightgreen;
 	--run-code: green;
 	--run-code-hover: rgb(0, 92, 0);
+	--submit--blue: #24a0ed;
 	--primary-text-disabled: #bdbdbd;
 }
 
@@ -60,4 +61,32 @@ header a:disabled {
 
 header svg:focus {
 	outline: none;
+}
+/* Login Form */
+
+form {
+	background-color: var(--primary);
+	border: 1px solid var(--secondary);
+}
+
+form label {
+	color: var(--primary-text);
+}
+
+form input {
+	background-color: white;
+	border: 1px solid var(--secondary);
+}
+
+form button {
+	color: var(--submit--blue);
+	transition-duration: 0.4s;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid var(--submit--blue);
+}
+
+form button:hover {
+	background-color: var(--submit--blue); /* Green */
+	color: white;
 }

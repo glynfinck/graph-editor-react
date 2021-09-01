@@ -61,6 +61,7 @@ const EditorWindow = (props) => {
 	);
 
 	useEffect(() => {
+		console.log(animating);
 		if (animating) {
 			animateHelper((101 - animationSpeed) * 8);
 			dispatch(graphActions.finishAnimation());

@@ -114,3 +114,67 @@ export const computeInitBBOX = (nodes, buffer = 100) => {
 	};
 	return result;
 };
+
+export const getPreviousNodeName = (node) => {
+	switch (node.type) {
+		case "current": {
+			return "none";
+		}
+		case "currentActivated": {
+			return "activated";
+		}
+		case "currentPath": {
+			return "path";
+		}
+		default:
+			return "none";
+	}
+};
+
+export const getCurrentNodeName = (node) => {
+	switch (node.type) {
+		case "none": {
+			return "current";
+		}
+		case "activated": {
+			return "currentActivated";
+		}
+		case "path": {
+			return "currentPath";
+		}
+		default:
+			return "none";
+	}
+};
+
+export const getPreviousEdgeName = (edge) => {
+	switch (edge.type) {
+		case "currentEdge": {
+			return "emptyEdge";
+		}
+		case "currentActivatedEdge": {
+			return "activatedEdge";
+		}
+		case "currentPathEdge": {
+			return "pathEdge";
+		}
+		default:
+			return "emptyEdge";
+	}
+};
+
+export const getCurrentEdgeName = (edge) => {
+	switch (edge.type) {
+		case "emptyEdge": {
+			return "currentEdge";
+		}
+		case "activatedEdge": {
+			return "currentActivatedEdge";
+		}
+		case "pathEdge": {
+			return "currentPathEdge";
+		}
+		default:
+			return "emptyEdge";
+	}
+};

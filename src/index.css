@@ -1,9 +1,12 @@
+/* Color Definitions */
 :root {
 	--primary: #f1f1f1;
 	--secondary: #e0e0e0;
 	--primary-text: #5d5d5d;
 	--primary-text-hover: #2e2e2e;
-	--highlighted-node-color: lightgreen;
+	--activated-color: #42c0fb;
+	--path-color: #fdd300;
+	--current-color: red;
 	--run-code: green;
 	--run-code-hover: rgb(0, 92, 0);
 	--submit--blue: #24a0ed;
@@ -20,21 +23,129 @@ body,
 	font-family: Roboto, sans-serif;
 }
 
+/* Graph Nodes/Edges Styles */
+
 .node-text tspan {
 	font-size: 40px;
 }
 
+/* Nodes */
+
 #activated {
-	fill: var(--highlighted-node-color);
+	fill: var(--activated-color);
 }
 
+#path {
+	fill: var(--path-color);
+}
+
+#currentActivated {
+	fill: var(--activated-color);
+}
+
+#currentPath {
+	fill: var(--path-color);
+}
+
+/* Edges */
+
 #activatedEdge {
-	fill: var(--highlighted-node-color);
+	fill: var(--activated-color);
+}
+
+#pathEdge {
+	fill: var(--path-color);
+}
+
+#currentActivatedEdge {
+	fill: var(--activated-color);
+}
+
+#currentPathEdge {
+	fill: var(--path-color);
+}
+
+/* Animations */
+
+#current circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-node-anim 1s infinite; */
+}
+
+#currentActivated circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-node-anim 1s infinite; */
+}
+
+#currentPath circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-node-anim 1s infinite; */
+}
+
+#currentEdge circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-edge-anim 1s infinite; */
+}
+
+#currentActivatedEdge circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-edge-anim 1s infinite; */
+}
+
+.currentEdge path {
+	stroke: var(--current-color);
+}
+
+.currentActivatedEdge path {
+	stroke: var(--current-color);
+}
+
+#currentPathEdge circle {
+	stroke: var(--current-color);
+	stroke-width: 2px;
+	/* animation: current-edge-anim 1s infinite; */
+}
+
+@keyframes fill-activated-anim {
+	to {
+		fill: var(--activated-color);
+	}
+}
+
+@keyframes current-node-anim {
+	0% {
+		r: 45;
+	}
+	50% {
+		r: 48;
+	}
+	100% {
+		r: 45;
+	}
+}
+
+@keyframes current-edge-anim {
+	0% {
+		r: 8;
+	}
+	50% {
+		r: 11;
+	}
+	100% {
+		r: 8;
+	}
 }
 
 .splitter {
 	background-color: var(--primary);
 }
+
+/* Global Styles */
 
 header {
 	color: var(--primary-text);

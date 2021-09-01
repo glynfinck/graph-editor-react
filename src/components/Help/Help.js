@@ -1,11 +1,4 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import GitHubIcon from "@material-ui/icons/GitHub";
-
-import helpMarkdownPath from "./help.md";
-import { loadTextFile } from "../../utils/utils";
-import { useEffect, useState } from "react";
-import { Flex, Text, Box, Link, Button } from "rebass";
+import { Flex, Text, Box, Link } from "rebass";
 
 const Help = () => {
 	return (

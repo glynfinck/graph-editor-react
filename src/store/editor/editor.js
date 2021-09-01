@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { dfs, bfs, dikstras } from "./python/algorithms.js";
 
 const initialEditorSlice = {
-	algorithms: [{ name: "BFS" }, { name: "DFS" }, { name: "DIKSTRAS" }],
+	algorithms: [
+		{ name: "BFS", code: bfs },
+		{
+			name: "DFS",
+			code: dfs,
+		},
+		{ name: "DIKSTRAS", code: dikstras },
+	],
+	selectedAlgorithm: 1,
 	script: "",
 	output: "",
 	isScriptProcessing: false,
@@ -20,6 +29,9 @@ const editorSlice = createSlice({
 		},
 		setIsEditorLoading(state, action) {
 			state.isEditorLoading = action.payload;
+		},
+		setSelectedAlgorithm(state, action) {
+			state.selectedAlgorithm = action.payload;
 		},
 	},
 });

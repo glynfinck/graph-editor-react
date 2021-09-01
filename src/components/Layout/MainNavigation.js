@@ -3,16 +3,11 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import HelpIcon from "@material-ui/icons/Help";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../../store/auth/auth";
 import { uiActions } from "../../store/ui/ui";
 
 const MainNavigation = (props) => {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const dispatch = useDispatch();
-
-	const logoutHandler = () => {
-		dispatch(authActions.logout());
-	};
 
 	const openHelpModalHandler = () => {
 		dispatch(uiActions.openHelpModal());

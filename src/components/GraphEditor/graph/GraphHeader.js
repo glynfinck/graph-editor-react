@@ -1,24 +1,23 @@
-import classes from "./GraphHeader.module.css";
 import Slider from "@material-ui/core/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { graphActions } from "../../../store/graph/graph";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { animationSpeedDefault } from "../../../store/graph/graph";
-import { Flex, Text, Box, Button } from "rebass";
+import { Flex, Box, Button } from "rebass";
 import ReactTooltip from "react-tooltip";
 
 const GraphHeader = (props) => {
 	const dispatch = useDispatch();
 	const sliderRef = useRef();
 	const animationSpeed = useSelector((state) => state.graph.animationSpeed);
+	const animating = useSelector((state) => state.graph.animating);
 	const simulationStarted = useSelector(
 		(state) => state.graph.simulationStarted
 	);
-	const isEditorLoading = useSelector((state) => state.editor.isEditorLoading);
 
 	const resetActivatedNodesHandler = () => {
-		dispatch(graphActions.deactivateAll());
+		dispatch(graphActions.resetGraph());
 	};
 
 	const sliderChangedHandler = (event) => {
@@ -31,7 +30,7 @@ const GraphHeader = (props) => {
 	};
 
 	let slider = (
-		<Box width="100px" mt="6px">
+		<Box width="100px" ml="6px" mt="6px">
 			<Slider
 				data-tip
 				data-for="sim-speed-slider"
@@ -73,12 +72,12 @@ const GraphHeader = (props) => {
 				effect="solid"
 				place="bottom"
 			>
-				<span>Reset Activated</span>
+				<span>Reset Graph</span>
 			</ReactTooltip>
 		</Box>
 	);
 
-	const disabled = simulationStarted || isEditorLoading;
+	const disabled = simulationStarted || !props.isWorkerLoaded;
 
 	if (disabled) {
 		slider = (

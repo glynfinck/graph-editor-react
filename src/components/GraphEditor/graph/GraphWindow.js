@@ -4,7 +4,6 @@ import { withResizeDetector } from "react-resize-detector";
 import classes from "./GraphWindow.module.css";
 import GraphHeader from "./GraphHeader";
 import Graph from "./Graph";
-import { Row, Col } from "react-bootstrap";
 
 // const headerHeight = 50;
 
@@ -12,7 +11,10 @@ const GraphWindow = (props) => {
 	return (
 		<div className={classes["graph-window"]}>
 			<div>
-				<GraphHeader />
+				<GraphHeader
+					isCodeFinished={props.isCodeFinished}
+					isWorkerLoaded={props.isWorkerLoaded}
+				/>
 			</div>
 			<div
 				style={{

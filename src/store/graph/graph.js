@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { num2LetterID } from "../../utils/graph-utils";
+import {
+	num2LetterID,
+	getPreviousNodeName,
+	getPreviousEdgeName,
+	getCurrentNodeName,
+	getCurrentEdgeName,
+} from "../../utils/graph-utils";
 
 export const animationSpeedDefault = 70;
 
@@ -10,6 +16,8 @@ const initialGraphState = {
 	compliationFinished: false,
 	simulationStarted: false,
 	animationSpeed: animationSpeedDefault,
+	currentNode: null,
+	currentEdge: null,
 	animating: false,
 	nodes: [
 		{
@@ -163,9 +171,118 @@ const graphSlice = createSlice({
 		animate(state, action) {
 			const { type, payload } = action.payload;
 			switch (type) {
+				case "PYTHON_SET_CURRENT": {
+					// if our new current is an edge
+					if (payload.source && payload.target) {
+						const edge_idx = state.edges.findIndex((edge) => {
+							return (
+								(edge.source === payload.source &&
+									edge.target === payload.target) ||
+								(edge.source === payload.target &&
+									edge.target === payload.source)
+							);
+						});
+
+						// if the edge exists
+						if (edge_idx !== -1) {
+							// un-set old current
+							if (state.currentNode !== null) {
+								const curr_node_idx = state.currentNode;
+								const curr_node = state.nodes[curr_node_idx];
+
+								state.nodes[curr_node_idx].type = getPreviousNodeName(
+									curr_node
+								);
+							}
+							if (state.currentEdge !== null) {
+								const curr_edge_idx = state.currentEdge;
+								const curr_edge = state.edges[curr_edge_idx];
+
+								state.edges[curr_edge_idx].type = getPreviousEdgeName(
+									curr_edge
+								);
+							}
+
+							// set new current edge
+							const edge = state.edges[edge_idx];
+							if (payload.peek) {
+								state.edges[edge_idx].type = getCurrentEdgeName(edge);
+								state.currentNode = null;
+								state.currentEdge = edge_idx;
+							} else {
+								state.edges[edge_idx].type = payload.path
+									? "pathEdge"
+									: "activatedEdge";
+								state.edges[edge_idx].type = getCurrentEdgeName(edge);
+								state.currentNode = null;
+								state.currentEdge = edge_idx;
+							}
+						}
+					} else {
+						// the new current is a node
+						const node_idx = state.nodes.findIndex((node) => {
+							return node.id === payload.id;
+						});
+
+						// if the node exists
+						if (node_idx !== -1) {
+							// un-set old current
+							if (state.currentNode !== null) {
+								const curr_node_idx = state.currentNode;
+								const curr_node = state.nodes[curr_node_idx];
+
+								state.nodes[curr_node_idx].type = getPreviousNodeName(
+									curr_node
+								);
+							}
+							if (state.currentEdge !== null) {
+								const curr_edge_idx = state.currentEdge;
+								const curr_edge = state.edges[curr_edge_idx];
+
+								state.edges[curr_edge_idx].type = getPreviousEdgeName(
+									curr_edge
+								);
+							}
+
+							// set new current node
+							const node = state.nodes[node_idx];
+							if (payload.peek) {
+								state.nodes[node_idx].type = getCurrentNodeName(node);
+								state.currentNode = node_idx;
+								state.currentEdge = null;
+							} else {
+								state.nodes[node_idx].type = payload.path
+									? "path"
+									: "activated";
+								state.nodes[node_idx].type = getCurrentNodeName(node);
+								state.currentNode = node_idx;
+								state.currentEdge = null;
+							}
+						}
+					}
+					break;
+				}
+				case "RESET_CURRENT": {
+					// un-set old current
+					if (state.currentNode !== null) {
+						const curr_node_idx = state.currentNode;
+						const curr_node = state.nodes[curr_node_idx];
+
+						state.nodes[curr_node_idx].type = getPreviousNodeName(curr_node);
+					}
+					if (state.currentEdge !== null) {
+						const curr_edge_idx = state.currentEdge;
+						const curr_edge = state.edges[curr_edge_idx];
+
+						state.edges[curr_edge_idx].type = getPreviousEdgeName(curr_edge);
+					}
+					state.currentNode = null;
+					state.currentEdge = null;
+					break;
+				}
 				case "PYTHON_ACTIVATE_NODE": {
 					const idx = state.nodes.findIndex((node) => {
-						return node.title === payload;
+						return node.id === +payload.id;
 					});
 
 					if (idx !== -1) {
@@ -173,32 +290,23 @@ const graphSlice = createSlice({
 					}
 					break;
 				}
-				case "PYTHON_ACTIVATE_EDGE": {
-					const { source, target } = payload;
-					const source_idx = state.nodes.findIndex((node) => {
-						return node.title === source;
-					});
-					const target_idx = state.nodes.findIndex((node) => {
-						return node.title === target;
-					});
-
-					if (source_idx !== -1 && target_idx !== -1) {
-						const source_id = state.nodes[source_idx].id;
-						const target_id = state.nodes[target_idx].id;
-
+				case "PYTHON_ACTIVATE_EDGE":
+					{
 						const M = state.edges.length;
 						for (let i = 0; i < M; i++) {
 							const edge = state.edges[i];
-							if (edge.source === source_id && edge.target === target_id) {
+							if (
+								edge.source === payload.source &&
+								edge.target === payload.target
+							) {
 								state.edges[i].type = "activatedEdge";
 								break;
 							}
 						}
 					}
 					break;
-				}
 				default:
-					return;
+					break;
 			}
 		},
 		deactivateAllNodes(state, action) {
@@ -217,7 +325,9 @@ const graphSlice = createSlice({
 				};
 			});
 		},
-		deactivateAll(state, action) {
+		resetGraph(state, action) {
+			state.currentNode = null;
+			state.currentEdge = null;
 			state.nodes = state.nodes.map((node) => {
 				return {
 					...node,
@@ -234,6 +344,7 @@ const graphSlice = createSlice({
 		setAnimation(state, action) {
 			state.animationSpeed = action.payload;
 		},
+
 		compliationStarted(state, action) {
 			state.simulationStarted = true;
 			state.compliationFinished = false;

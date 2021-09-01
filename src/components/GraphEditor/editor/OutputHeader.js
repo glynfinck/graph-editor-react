@@ -1,8 +1,6 @@
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Flex, Box, Text, Button } from "rebass";
-
-import classes from "./OutputHeader.module.css";
+import { Flex, Box, Text } from "rebass";
 
 const OutputHeader = (props) => {
 	return (

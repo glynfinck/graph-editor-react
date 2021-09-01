@@ -1,13 +1,9 @@
-import classes from "./EditorHeader.module.css";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import SettingsIcon from "@material-ui/icons/Settings";
-import SaveIcon from "@material-ui/icons/Save";
-import HelpIcon from "@material-ui/icons/Help";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import { Flex, Box, Link, Button } from "rebass";
+
+import { Flex, Box, Button } from "rebass";
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../../../store/ui/ui";
 import { Select } from "@rebass/forms";
+import { editorActions } from "../../../store/editor/editor";
 
 import ReactTooltip from "react-tooltip";
 import { Fragment } from "react";
@@ -19,11 +15,19 @@ const EditorHeader = (props) => {
 	const simulationStarted = useSelector(
 		(state) => state.graph.simulationStarted
 	);
-	const isEditorLoading = useSelector((state) => state.editor.isEditorLoading);
 	const algorithms = useSelector((state) => state.editor.algorithms);
+	const selectedAlgorithm = useSelector(
+		(state) => state.editor.selectedAlgorithm
+	);
+
+	const selectedAlgorithmName = algorithms[selectedAlgorithm].name;
 
 	const runPythonCode = () => {
 		props.onRunPythonCode();
+	};
+
+	const onChangeAlgorithm = (event) => {
+		dispatch(editorActions.setSelectedAlgorithm(event.target.selectedIndex));
 	};
 
 	let runCode = (
@@ -48,7 +52,7 @@ const EditorHeader = (props) => {
 		</Fragment>
 	);
 
-	const disabled = simulationStarted || isEditorLoading;
+	const disabled = simulationStarted || !props.isWorkerLoaded;
 
 	if (disabled) {
 		runCode = (
@@ -72,7 +76,6 @@ const EditorHeader = (props) => {
 				<Select
 					id="algorithm"
 					name="algorithm"
-					defaultValue="DFS"
 					height="28px"
 					width="120px"
 					fontSize="15px"
@@ -82,6 +85,9 @@ const EditorHeader = (props) => {
 					style={{ borderRadius: "5px" }}
 					data-tip
 					data-for="select-algorithm"
+					value={selectedAlgorithmName}
+					selectedIndex={selectedAlgorithm}
+					onChange={onChangeAlgorithm}
 				>
 					{algorithms.map((value, index, arr) => (
 						<option key={index}>{value.name}</option>

@@ -1,7 +1,4 @@
-import CloseIcon from "@material-ui/icons/Close";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { ButtonGroup, Button, Row, Col, Form } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import classes from "./OutputWindow.module.css";
 
 const OutputWindow = (props) => {

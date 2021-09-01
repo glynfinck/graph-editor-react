@@ -19,7 +19,7 @@ async function loadPyodideAndPackages() {
 
 	await self.pyodide.loadPackage(["networkx"]);
 
-	self.postMessage({ type: "WORKER_INIT", payload: true });
+	self.postMessage({ type: "PACKAGES_LOADED" });
 }
 
 let pyodideReadyPromise = loadPyodideAndPackages();

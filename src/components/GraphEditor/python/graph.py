@@ -27,6 +27,12 @@ class Graph:
       return self.G.nodes.data()
     else:
       return self.G.nodes
+  
+  def hasNode(self, _id):
+    return self.G.has_node(_id)
+
+  def hasEdge(self, source_id, target_id):
+    return self.G.has_edge(source_id, target_id)
 
   def setCurrentNode(self, _id, peek=False, path=False):
     try:

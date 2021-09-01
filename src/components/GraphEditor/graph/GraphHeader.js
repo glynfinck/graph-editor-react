@@ -11,7 +11,6 @@ const GraphHeader = (props) => {
 	const dispatch = useDispatch();
 	const sliderRef = useRef();
 	const animationSpeed = useSelector((state) => state.graph.animationSpeed);
-	const animating = useSelector((state) => state.graph.animating);
 	const simulationStarted = useSelector(
 		(state) => state.graph.simulationStarted
 	);

@@ -37,8 +37,11 @@ self.onmessage = async (event) => {
 
 	// Now is the easy part, the one that is similar to working in the main thread:
 	try {
-		self.pyodide.runPython("import networkx as nx");
+		self.pyodide.runPython("import copy");
 		self.pyodide.runPython("import time");
+		self.pyodide.runPython("import numpy as np");
+		self.pyodide.runPython("import networkx as nx");
+
 		self.pyodide.runPython(python);
 		// let result = await self.pyodide.runPythonAsync(python);
 		// self.postMessage({ result: result });

@@ -22,7 +22,6 @@ const usePyodide = () => {
 	const handleWorkerMessages = useCallback(
 		(e) => {
 			const { data } = e;
-			console.log(data);
 			switch (data.type) {
 				case "PACKAGES_LOADED": {
 					setWorkerStatus("PACKAGES_LOADED");

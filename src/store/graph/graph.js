@@ -369,6 +369,9 @@ const graphSlice = createSlice({
 		clearAnimation(state, action) {
 			state.animation = [];
 		},
+		createRandomGraph(state, action) {
+			//
+		},
 		shuffleIDs(state, action) {
 			// TODO
 		},

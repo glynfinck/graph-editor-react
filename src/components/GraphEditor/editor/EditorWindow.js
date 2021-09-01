@@ -33,7 +33,7 @@ const EditorWindow = (props) => {
 	const edges = useSelector((state) => state.graph.edges);
 
 	const animation = props.animation;
-	const animating = props.isCodeFinished && !props.error;
+	const animating = useSelector((state) => state.graph.animating);
 	const animationSpeed = useSelector((state) => state.graph.animationSpeed);
 
 	const { width, height, ref } = useResizeDetector();
@@ -56,7 +56,6 @@ const EditorWindow = (props) => {
 				await sleep(ms);
 				dispatch(graphActions.animate(animation_prime[i]));
 			}
-			dispatch(graphActions.finishAnimation());
 		},
 		[animation, dispatch]
 	);
@@ -64,8 +63,9 @@ const EditorWindow = (props) => {
 	useEffect(() => {
 		if (animating) {
 			animateHelper((101 - animationSpeed) * 8);
+			dispatch(graphActions.finishAnimation());
 		}
-	}, [animating, animationSpeed, animateHelper]);
+	}, [animating, animationSpeed, animateHelper, dispatch]);
 
 	useEffect(() => {
 		loadPythonCode(boilerPlatePath).then((code) => {

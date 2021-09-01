@@ -40,35 +40,62 @@ def bfs(visited, graph, node):
 
 # Driver Code
 bfs(visited, graph, 'A')`;
-export const dikstras = `def dijkstra(start):
-    Q = []
+export const dikstras = `# re-factored from (https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
+
+def minDistance(dist, sptSet):
+ 
+    # Initialize minimum distance for next node
+    minimum = np.inf
+
+    # Search not nearest vertex not in the
+    # shortest path tree
+    min_index = 0
+    for v in graph.getNodes():
+        if dist[v] < minimum and sptSet[v] == False:
+            minimum = dist[v]
+            min_index = v
+
+    return min_index
+ 
+def dijkstra(src):
+    N = len(graph.getNodes())
+
     dist = dict()
+    sptSet = dict()
     prev = dict()
-
     for node in graph.getNodes():
-        dist[node]= np.inf
-        prev[node]= None
-        Q.append(node)
+        dist[node] = np.inf
+        sptSet[node] = False
+        prev[node] = None
 
-    dist[start] = 0
-    
-    while len(Q) != 0:
-        u_idx = np.argmin(dist)
-        u = copy.deepcopy(Q[u_idx])
+    dist[src] = 0
+
+    for cout in range(N):
+
+        # Pick the minimum distance vertex from
+        # the set of vertices not yet processed.
+        # u is always equal to src in first iteration
+        u = minDistance(dist, sptSet)
+
+        # set u to be the current node
         graph.setCurrentNode(u)
 
-        del Q[u_idx]
-        
-        for v in graph.getNeighbors(u):
-            alt = dist[u] + 1
-            if alt < dist[v]:
-                if not prev[v]:
-                    graph.setCurrentEdge(u, v)
-                    graph.setCurrentNode(v)
-                dist[v] = alt
+        # Put the minimum distance vertex in the
+        # shortest path tree
+        sptSet[u] = True
+
+        # Update dist value of the adjacent vertices
+        # of the picked vertex only if the current
+        # distance is greater than new distance and
+        # the vertex in not in the shortest path tree
+        for v in graph.getNodes():
+            if graph.hasEdge(u, v) and sptSet[v] == False and dist[v] > dist[u] + 1:
+                # set u,v to be the current edge
+                graph.setCurrentEdge(u,v)
                 prev[v] = u
-                
-    return prev, dist      
+                dist[v] = dist[u] + 1
+    
+    return prev, dist
 
 source = "A"
 target = "D"
@@ -89,5 +116,4 @@ print(path)
 for i in range(0,len(path)-1):
     graph.setCurrentNode(path[i], path=True)
     graph.setCurrentEdge(path[i], path[i+1], path=True)
-    graph.setCurrentNode(path[i+1], path=True)
-`;
+    graph.setCurrentNode(path[i+1], path=True)`;

@@ -4,64 +4,87 @@ This documents explains how to use the [Graph Editor](https://graph-editor-7e4ef
 
 ## Table of Contents
 
-1. [Editor](#editor)
+1. [Notes on Usage](#notes-on-usage)
+2. [Editor](#editor)
    - [Graph Class](#graph-class)
-     - [Activate Node](#activate-node)
-     - [Activate Edge](#activate-node)
+     - [Set Current Node](#activate-node)
+     - [Set Current Edge](#activate-node)
      - [Get Neighbors of a Node](#get-neighbors-of-a-node)
      - [Get All Nodes](#get-all-nodes)
      - [Get All Edges](#get-all-edges)
-2. [Graph](#graph)
+     - [Has Node](#has-node)
+     - [Has Edge](#has-edge)
+3. [Graph](#graph)
    - [Creating Nodes](#creating-nodes)
    - [Creating Edges](#creating-edges)
    - [Deleting Nodes](#deleting-nodes)
    - [Deleting Edges](#deleting-edges)
-3. [Dependencies](#dependencies)
+4. [Dependencies](#dependencies)
+
+## Notes on Usage
+
+- The graph is treated as **un-directed** by default (no support for directed graph so far, this will be added in the future)
+  - If edge (**A** -> **B**) exists then edge (**B** -> **A**) exists and vice versa.
+- There currently is no support for **mobile devices** at the moment (this feature will come in the future)
 
 ## Editor
 
 ### Graph Class
 
-#### Activate Node
+#### Set Current Node
 
-##### `activateNode(id)`
+##### `setCurrentNode(id, peek=False, path=False)`
 
-Activating a node will turn its color to green. This can be used to track vistited nodes as you progress throughout your algorithm.
+Setting the current node will give a red border around the node chosen using `id` and will make the fill of the node blue. Setting the current node will automatically un-set the previous current node/edge removing the red border. This alows the user to automatically keep track of visited nodes/edges while also showing the current node as well.
+
+If the optional parameter `peek` is set to `True` then the node with id equal to `id` will not be set to blue and will remain white.
+
+If the optional parameter `path` is set to `True` the node with id equal to `id` will be set to yellow instead of blue. This is used to indicate a path being found instead of one of the visited nodes/edges.
 
 ##### Usage
 
-To activate the node with id "A" we would use the following command:
+The following string of commands showcases how the method can be used.
 
 ```
 g = Graph()
-g.activateNode("A")
+g.setCurrentNode("A")
+g.setCurrentNode("B", peek=True)
+g.setCurrentNode("C", path=True)
+g.setCurrentNode("D", peek=True, path=True)
 ```
 
 Producing the following result in our graph:
 
 <p align="center">
-  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/activated-node.png?alt=media&token=030b3951-e8c6-4167-b2c2-87ad742248be">
+  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/graph-editor-set-current-node.gif?alt=media&token=36b444f7-dd3e-424e-8ee9-63dc22433776">
 </p>
 
-#### Activate Edge
+#### Set Current Edge
 
-##### `activateEdge(source_id, target_id)`
+##### `setCurrentEdge(source_id, target_id, peek=False, path=False)`
 
-Activating a edge will turn its color to green. This can be used to track vistited edges as you progress throughout your algorithm.
+Setting the current edge will give a red border around the edge chosen using `source_id` and `target_id` and will make the fill of the edge blue. Setting the current node will automatically un-set the previous current node/edge removing the red border. This alows the user to automatically keep track of visited nodes/edges while also showing the current edge as well.
+
+If the optional parameter `peek` is set to `True` then the edge chosen using `source_id` and `target_id` will not be set to blue and will remain white.
+
+If the optional parameter `path` is set to `True` the edge chosen using `source_id` and `target_id` will be set to yellow instead of blue. This is used to indicate a path being found instead of one of the visited nodes/edges.
 
 ##### Usage
 
-To activate the edge with a source node id of "A" and a target node id of "B" we would use the following command:
+The following string of commands showcases how the method can be used.
 
 ```
 g = Graph()
-g.activateEdge("A", "B")
+g.setCurrentEdge("A","B")
+g.setCurrentEdge("B","C", peek=True)
+g.setCurrentEdge("C","D", path=True)
+g.setCurrentEdge("D","A", peek=True, path=True)
 ```
 
 Producing the following result in our graph:
 
 <p align="center">
-  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/activated-edge.png?alt=media&token=517238df-9d91-4a6c-a351-1a4724804d59">
+  <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/graph-editor-set-current-edge.gif?alt=media&token=59a38fc8-3058-45bf-a690-650ce960fa4e">
 </p>
 
 #### Get Neighbors of a Node
@@ -83,11 +106,12 @@ print(neighbors)
 <p align="center">
   <img width="80%" height="100%" src="https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/get-neighbors.png?alt=media&token=083ab775-97fc-4387-8ca0-539c73c65676">
 </p>
+
 We get the following output:
+
 ```
 {'C': {}, 'B': {}, 'D': {}}
 ```
-
 
 #### Get All Nodes
 
@@ -140,6 +164,18 @@ We get the following output:
 ```
 [('A', 'C', {}), ('A', 'B', {}), ('A', 'D', {}), ('B', 'C', {}), ('B', 'D', {})]
 ```
+
+#### Has Node
+
+##### `hasNode(id)`
+
+Will return `True` if the node with id equal to `id` is in the graph and `False` otherwise.
+
+#### Has Edge
+
+##### `hasNode(source_id, target_id)`
+
+Will return `True` if the node with source id equal to `source_id` and target id equal to `target_id` and `False` otherwise.
 
 ## Graph
 

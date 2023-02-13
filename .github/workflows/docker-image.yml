@@ -23,4 +23,4 @@ jobs:
     - name: Build the Docker Image
       run: docker build . --file Dockerfile --tag graph-editor-react:$(date +%s)
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/graph-editor-react:$(date +%s)
+      run: docker push ${{secrets.DOCKER_USER}}/graph-editor-react

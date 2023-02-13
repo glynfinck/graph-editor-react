@@ -4,8 +4,9 @@ This documents explains how to use the [Graph Editor](https://graph-editor-7e4ef
 
 ## Table of Contents
 
-1. [Notes on Usage](#notes-on-usage)
-2. [Editor](#editor)
+1. [Getting Started](#getting-started)
+2. [Notes on Usage](#notes-on-usage)
+3. [Editor](#editor)
    - [Graph Class](#graph-class)
      - [Set Current Node](#set-current-node)
      - [Set Current Edge](#set-current-edge)
@@ -14,12 +15,20 @@ This documents explains how to use the [Graph Editor](https://graph-editor-7e4ef
      - [Get All Edges](#get-all-edges)
      - [Has Node](#has-node)
      - [Has Edge](#has-edge)
-3. [Graph](#graph)
+4. [Graph](#graph)
    - [Creating Nodes](#creating-nodes)
    - [Creating Edges](#creating-edges)
    - [Deleting Nodes](#deleting-nodes)
    - [Deleting Edges](#deleting-edges)
-4. [Dependencies](#dependencies)
+5. [Dependencies](#dependencies)
+
+## Getting Started
+
+The easiest way to use this application is to pull the docker image on [DockerHub](https://hub.docker.com/r/glynfinck/graph-editor-react) using the following command:
+
+```
+docker pull glynfinck/graph-editor-react
+```
 
 ## Notes on Usage
 

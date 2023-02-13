@@ -33,5 +33,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/${{ env.REPO }}:${{ github.sha }}
+          tags: ${{ github.repository }}:${{ github.sha }}
           file: ./Dockerfile

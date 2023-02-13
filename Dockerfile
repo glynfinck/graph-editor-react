@@ -16,6 +16,8 @@ RUN npm install react-scripts@3.4.1 -g --silent
 # add app
 COPY . ./
 
+# comment
+
 # expose to port 3000
 EXPOSE 3000
 

@@ -1,8 +1,6 @@
-name: Docker Image CI
+name: Docker Image Build CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -29,6 +27,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
+          push: false
           tags: ${{ github.repository }}:latest
           file: ./Dockerfile

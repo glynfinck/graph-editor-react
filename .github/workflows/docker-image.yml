@@ -14,5 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Graph Editor React Docker Image
+    - name: Docker Login
+      env: 
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker Image
       run: docker build . --file Dockerfile --tag graph-editor-react:$(date +%s)
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKER_USER}}/graph-editor-react:$(date +%s)

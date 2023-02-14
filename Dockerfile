@@ -1,25 +1,18 @@
-# pull official base image
-FROM node:lts-alpine3.17 
-
-# set working directory
+# build environment
+FROM node:lts-alpine3.17 as build
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
-
-# add app
 COPY . ./
+RUN npm run build
 
-# comment
-
-# expose to port 3000
-EXPOSE 3000
-
-# start app
-CMD ["npm", "start"]
+# production enviornment
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+# new
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

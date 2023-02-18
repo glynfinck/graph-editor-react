@@ -1,11 +1,7 @@
-// import { Graph } from "react-d3-graph";
 import { withResizeDetector } from "react-resize-detector";
-
 import classes from "./GraphWindow.module.css";
 import GraphHeader from "./GraphHeader";
 import Graph from "./Graph";
-
-// const headerHeight = 50;
 
 const GraphWindow = (props) => {
 	return (

@@ -70,7 +70,7 @@ const usePyodide = () => {
 	);
 
 	useEffect(() => {
-		setWorker(new Worker("./webworker.js"));
+		setWorker(new Worker("/webworker.js"));
 		setWorkerStatus("WORKER_INITIALIZED");
 	}, []);
 

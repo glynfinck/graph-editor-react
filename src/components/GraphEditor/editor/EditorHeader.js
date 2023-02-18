@@ -1,15 +1,15 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import HelpIcon from '@material-ui/icons/Help';
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import HelpIcon from "@material-ui/icons/Help";
 
-import { Flex, Box, Button } from 'rebass';
-import { useDispatch, useSelector } from 'react-redux';
-import { Select } from '@rebass/forms';
-import { editorActions } from '../../../store/editor/editor';
+import { Flex, Box, Button } from "rebass";
+import { useDispatch, useSelector } from "react-redux";
+import { Select } from "@rebass/forms";
+import { editorActions } from "../../../store/editor/editor";
 
-import ReactTooltip from 'react-tooltip';
-import { Fragment } from 'react';
+import ReactTooltip from "react-tooltip";
+import { Fragment } from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const EditorHeaderStyle = styled.div`
   svg {
@@ -95,7 +95,7 @@ const EditorHeader = (props) => {
           px="auto"
           p="5px 10px"
           color="var(--primary-text)"
-          style={{ borderRadius: '5px' }}
+          style={{ borderRadius: "5px" }}
           data-tip
           data-for="select-algorithm"
           value={selectedAlgorithmName}

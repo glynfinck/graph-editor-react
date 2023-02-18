@@ -1,141 +1,116 @@
 import { GraphView } from "react-digraph";
-
 import classes from "./Graph.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-	NodeTypes,
-	NodeSubtypes,
-	EdgeTypes,
+  NodeTypes,
+  NodeSubtypes,
+  EdgeTypes,
 } from "../../../store/graph/graph-types";
 import { graphActions } from "../../../store/graph/graph";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { computeInitBBOX } from "../../../utils/graph-utils";
+import { useParams } from "react-router-dom";
+import graphData from "../../../data/graphData";
 
 const NODE_KEY = "id";
 
 const Graph = () => {
-	const nodes = useSelector((state) => state.graph.nodes);
-	const edges = useSelector((state) => state.graph.edges);
-	const [selected, setSelected] = useState({});
+  // Route Parameters
+  const params = useParams();
 
-	const disptach = useDispatch();
+  // State
+  const [isLoadingGraph, setIsLoadingGraph] = useState(true);
+  const [initialBBOX, setInitialBBOX] = useState();
+  const [selected, setSelected] = useState({});
+  const nodes = useSelector((state) =>
+    state.graph.nodes.map((node) => ({ ...node }))
+  );
+  const edges = useSelector((state) =>
+    state.graph.edges.map((edge) => ({ ...edge }))
+  );
+  const disptach = useDispatch();
 
-	let nodes_copy = JSON.parse(JSON.stringify(nodes));
+  // On load
+  useEffect(() => {
+    // TODO: Replace this with API request
+	setIsLoadingGraph(true)
+    const graph = graphData.find((element) => {
+      return element.slug == params.graphId;
+    });
+    disptach(graphActions.clearGraph());
+    for (var node of graph.graph.nodes) {
+      disptach(graphActions.addNode({ x: node.x, y: node.y, id: node.id }));
+    }
+    for (var edge of graph.graph.edges) {
+      disptach(
+        graphActions.addEdge({ source: edge.source, target: edge.target })
+      );
+    }
+    setIsLoadingGraph(false);
+    setInitialBBOX(computeInitBBOX(nodes, 200));
 
-	const onCreateNode = (x, y, mouseEvent) => {
-		disptach(graphActions.addNode({ x: +x, y: +y }));
-	};
+	return () => {}
+  }, []);
 
-	const onCreateEdge = (source, target) => {
-		// console.log(source, target);
-		disptach(graphActions.addEdge({ source: source.id, target: target.id }));
-	};
+  // Graph Events
+  const onCreateNode = (x, y, mouseEvent) => {
+    disptach(graphActions.addNode({ x: +x, y: +y }));
+  };
+  const onCreateEdge = (source, target) => {
+    disptach(graphActions.addEdge({ source: source.id, target: target.id }));
+  };
+  const canCreateEdge = () => true;
+  const onSelect = (selected) => {
+    setSelected(selected);
+  };
+  const onSwapEdge = () => {};
+  const onUpdateNode = (node) => {
+    disptach(graphActions.updateNode({ ...node }));
+  };
+  const onDeleteSelected = (deleteSelected) => {
+    let delNodes = [];
+    let delEdges = [];
+    if (!!deleteSelected.nodes) {
+      deleteSelected.nodes.forEach((value) => {
+        delNodes.push(value.id);
+      });
+    }
+    if (!!deleteSelected.edges) {
+      deleteSelected.edges.forEach((value) => {
+        delEdges.push([value.source, value.target]);
+      });
+    }
+    disptach(graphActions.deleteSelected({ nodes: delNodes, edges: delEdges }));
+  };
 
-	const canCreateEdge = (source, target) => {
-		// console.log(source, target);
-		return true;
-	};
-
-	const onSelect = (selected) => {
-		setSelected(selected);
-	};
-
-	const onSwapEdge = (event) => {
-		// console.log(event);
-	};
-
-	const onDeleteSelected = (deleteSelected) => {
-		let delNodes = [];
-		let delEdges = [];
-		if (!!deleteSelected.nodes) {
-			deleteSelected.nodes.forEach((value, key, map) => {
-				delNodes.push(value.id);
-			});
-		}
-		if (!!deleteSelected.edges) {
-			deleteSelected.edges.forEach((value, key, map) => {
-				delEdges.push([value.source, value.target]);
-			});
-		}
-		disptach(graphActions.deleteSelected({ nodes: delNodes, edges: delEdges }));
-	};
-
-	const onUpdateNode = (node) => {
-		disptach(graphActions.updateNode({ ...node }));
-	};
-
-	const initialBBOX = computeInitBBOX(nodes_copy, 200);
-
-	return (
-		<div className={classes.graph}>
-			<GraphView
-				initialBBox={initialBBOX}
-				nodeKey={NODE_KEY}
-				nodes={nodes_copy}
-				edges={edges}
-				selected={selected}
-				nodeTypes={NodeTypes}
-				nodeSubtypes={NodeSubtypes}
-				edgeTypes={EdgeTypes}
-				showGraphControls={true}
-				allowMultiselect={true} // true by default, set to false to disable multi select.
-				onCreateNode={onCreateNode}
-				onCreateEdge={onCreateEdge}
-				onSelect={onSelect}
-				onSwapEdge={onSwapEdge}
-				onDeleteSelected={onDeleteSelected}
-				onUpdateNode={onUpdateNode}
-				canCreateEdge={canCreateEdge}
-			/>
-		</div>
-	);
+  if (isLoadingGraph) {
+    return <div></div>;
+  } else {
+    return (
+      <div className={classes.graph}>
+        <GraphView
+          initialBBox={initialBBOX}
+          nodeKey={NODE_KEY}
+          nodes={nodes}
+          edges={edges}
+          selected={selected}
+          nodeTypes={NodeTypes}
+          nodeSubtypes={NodeSubtypes}
+          edgeTypes={EdgeTypes}
+          showGraphControls={true}
+          allowMultiselect={true} // true by default, set to false to disable multi select.
+          onCreateNode={onCreateNode}
+          onCreateEdge={onCreateEdge}
+          onSelect={onSelect}
+          onDeleteSelected={onDeleteSelected}
+          onUpdateNode={onUpdateNode}
+          onSwapEdge={onSwapEdge}
+          canCreateEdge={canCreateEdge}
+        />
+      </div>
+    );
+  }
 };
 
 export default Graph;
-
-// class GraphDigraph extends Component {
-// 	/* Define custom graph editing methods here */
-
-// 	render() {
-// 		// const nodes = this.state.nodes;
-// 		// const edges = this.state.edges;
-// 		// const selected = this.state.selected;
-
-// 		const NodeTypes = GraphConfig.NodeTypes;
-// 		const NodeSubtypes = GraphConfig.NodeSubtypes;
-// 		const EdgeTypes = GraphConfig.EdgeTypes;
-
-// 		return (
-// 			<div className={classes.graph}>
-// 				<GraphView
-// 					ref="GraphView"
-// 					nodeKey={NODE_KEY}
-// 					nodes={null}
-// 					edges={null}
-// 					selected={null}
-// 					nodeTypes={NodeTypes}
-// 					nodeSubtypes={NodeSubtypes}
-// 					edgeTypes={EdgeTypes}
-// 					allowMultiselect={true} // true by default, set to false to disable multi select.
-// 					onSelect={this.onSelect}
-// 					onCreateNode={this.onCreateNode}
-// 					onUpdateNode={this.onUpdateNode}
-// 					onDeleteNode={this.onDeleteNode}
-// 					onCreateEdge={this.onCreateEdge}
-// 					onSwapEdge={this.onSwapEdge}
-// 					onDeleteEdge={this.onDeleteEdge}
-// 				/>
-// 			</div>
-// 		);
-// 	}
-// }
-
-// const mapStateToProps = (state) => {
-// 	return {
-// 		nodes: state.graph.nodes,
-// 		edges: state.graph.edges,
-// 	};
-// };
-
-// export default connect(mapStateToProps)(GraphDigraph);

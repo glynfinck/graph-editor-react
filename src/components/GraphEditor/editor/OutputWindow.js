@@ -1,14 +1,22 @@
-import { Row, Col } from "react-bootstrap";
-import classes from "./OutputWindow.module.css";
+import { List, ListItem, Box } from "@material-ui/core";
 
 const OutputWindow = (props) => {
-	return (
-		<Row style={{ height: "100%" }}>
-			<Col style={{ height: "100%" }}>
-				<textarea className={classes.textarea} value={props.output} disabled />
-			</Col>
-		</Row>
-	);
+  return (
+    <Box sx={{ background: "black", height: "100%" }}>
+      <List
+        style={{
+          padding: 0,
+          background: "black",
+          maxHeight: "100%",
+          overflow: "auto",
+        }}
+      >
+        {props.output.map((line, index) => {
+          return <ListItem key={index}>{line}</ListItem>;
+        })}
+      </List>
+    </Box>
+  );
 };
 
 export default OutputWindow;

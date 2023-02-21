@@ -7,6 +7,7 @@
     "@geoffcox/react-splitter": "^2.1.2",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@monaco-editor/react": "^4.2.2",
     "@reduxjs/toolkit": "^1.6.1",
     "react": "^16.14.0",
@@ -14,10 +15,10 @@
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.1",
+    "react-scripts": "^5.0.1",
     "redux": "^4.1.1",
     "web-vitals": "^3.1.1",
     "webpack": "^5.75.0",
-    "react-scripts": "^5.0.1",
     "worker-loader": "^3.0.8"
   },
   "scripts": {

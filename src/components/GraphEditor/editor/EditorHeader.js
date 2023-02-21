@@ -1,136 +1,90 @@
+import { Box, Button, AppBar, Toolbar, Container } from "@material-ui/core";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import HelpIcon from "@material-ui/icons/Help";
-
-import { Flex, Box, Button } from "rebass";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { useDispatch, useSelector } from "react-redux";
-import { Select } from "@rebass/forms";
 import { editorActions } from "../../../store/editor/editor";
-
-import ReactTooltip from "react-tooltip";
-import { Fragment } from "react";
-
-import styled from "styled-components";
-
-const EditorHeaderStyle = styled.div`
-  svg {
-    fill: var(--primary-text);
-
-    &:hover {
-      fill: black;
-    }
-  }
-`;
-
-// import Slider from "@material-ui/core/Slider";
 
 const EditorHeader = (props) => {
   const dispatch = useDispatch();
   const simulationStarted = useSelector(
     (state) => state.graph.simulationStarted
   );
-  const algorithms = useSelector((state) => state.editor.algorithms);
   const selectedAlgorithm = useSelector(
     (state) => state.editor.selectedAlgorithm
   );
-
-  const selectedAlgorithmName = algorithms[selectedAlgorithm].name;
+  const disabled = simulationStarted || !props.isWorkerLoaded;
+  const algorithms = useSelector((state) => state.editor.algorithms);
 
   const runPythonCode = () => {
     props.onRunPythonCode();
   };
 
   const onChangeAlgorithm = (event) => {
-    dispatch(editorActions.setSelectedAlgorithm(event.target.selectedIndex));
+    dispatch(editorActions.setSelectedAlgorithm(event.target.value));
   };
 
-  let runCode = (
-    <Fragment>
-      <Button
-        pt="8px"
-        pb="4px"
-        pl="5px"
-        color="var(--primary-text)"
-        onClick={runPythonCode}
-      >
-        <PlayArrowIcon data-tip data-for="run-code-button" />
-      </Button>
-      <ReactTooltip
-        id="run-code-button"
-        type="dark"
-        effect="solid"
-        place="bottom"
-      >
-        <span>Run Code</span>
-      </ReactTooltip>
-    </Fragment>
-  );
-
-  const disabled = simulationStarted || !props.isWorkerLoaded;
-
-  if (disabled) {
-    runCode = (
-      <Button
-        pt="8px"
-        pb="4px"
-        pl="5px"
-        color="var(--primary-text)"
-        onClick={runPythonCode}
-        disabled={disabled}
-      >
-        <PlayArrowIcon data-tip data-for="run-code-button" />
-      </Button>
-    );
-  }
-
   return (
-    <EditorHeaderStyle>
-      <Flex px={2} as="header" height="40px" alignItems="center" textAlign>
-        {runCode}
-        <Select
-          id="algorithm"
-          name="algorithm"
-          height="28px"
-          width="120px"
-          fontSize="15px"
-          px="auto"
-          p="5px 10px"
-          color="var(--primary-text)"
-          style={{ borderRadius: "5px" }}
-          data-tip
-          data-for="select-algorithm"
-          value={selectedAlgorithmName}
-          selectedIndex={selectedAlgorithm}
-          onChange={onChangeAlgorithm}
-        >
-          {algorithms.map((value, index, arr) => (
-            <option key={index}>{value.name}</option>
-          ))}
-        </Select>
-        <ReactTooltip
-          id="select-algorithm"
-          type="dark"
-          effect="solid"
-          place="bottom"
-        >
-          <span>Algorithm</span>
-        </ReactTooltip>
-        <Box mx="auto" />
-        <a
-          href="https://github.com/glynfinck/graph-editor"
-          color="var(--primary-text)"
-        >
-          <HelpIcon data-for="help-button" data-tip />
-        </a>
-        <ReactTooltip
-          id="help-button"
-          type="dark"
-          effect="solid"
-          place="bottom"
-        >
-          <span>Help</span>
-        </ReactTooltip>
-      </Flex>
-    </EditorHeaderStyle>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button onClick={runPythonCode} disabled={disabled}>
+              <PlayArrowIcon
+                style={{ fill: "white" }}
+                data-tip
+                data-for="run-code-button"
+              />
+            </Button>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                <InputLabel
+                  style={{
+                    color: "white",
+                  }}
+                  id="demo-select-small"
+                >
+                  Algorithm
+                </InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  value={selectedAlgorithm}
+                  label="Age"
+                  onChange={onChangeAlgorithm}
+                  style={{
+                    color: "white",
+                    borderColor: "white",
+                    fill: "white",
+                  }}
+                >
+                  {algorithms.map((algorithm, index) => {
+                    return (
+                      <MenuItem key={index} value={index}>
+                        {algorithm.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
+          <Button
+            style={{
+              borderColor: "white",
+              color: "white",
+              fill: "white",
+            }}
+            href="https://github.com/glynfinck/graph-editor-react"
+          >
+            <HelpIcon />
+          </Button>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

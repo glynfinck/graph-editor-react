@@ -7,18 +7,20 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
-import theme from "./themes/theme";
 import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@material-ui/core/styles";
+
+const theme = createTheme();
 
 ReactDOM.render(
-	<ThemeProvider theme={theme}>
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>
-	</ThemeProvider>,
-	document.getElementById("root")
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ThemeProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

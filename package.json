@@ -1,65 +1,43 @@
 {
-	"name": "graph-editor",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@emotion/react": "^11.4.1",
-		"@geoffcox/react-splitter": "^2.1.1",
-		"@material-ui/core": "^4.12.3",
-		"@material-ui/icons": "^4.11.2",
-		"@monaco-editor/react": "^4.2.2",
-		"@rebass/forms": "^4.0.6",
-		"@rebass/preset": "^4.0.5",
-		"@reduxjs/toolkit": "^1.6.1",
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.8.3",
-		"@webscopeio/react-console": "^1.2.1",
-		"bootstrap": "^5.1.0",
-		"comlink": "^4.3.1",
-		"emotion-theming": "^11.0.0",
-		"muicss": "^0.10.3",
-		"react": "^16.14.0",
-		"react-bootstrap": "^2.1.2",
-		"react-digraph": "^8.1.0",
-		"react-markdown": "^7.0.1",
-		"react-redux": "^7.2.4",
-		"react-resize-detector": "^6.7.6",
-		"react-router-dom": "^5.2.1",
-		"react-scripts": "^5.0.1",
-		"react-split-pane": "^0.1.92",
-		"react-tooltip": "^4.2.21",
-		"rebass": "^4.0.7",
-		"redux": "^4.1.1",
-		"remark-gfm": "^2.0.0",
-		"styled-components": "^5.3.0",
-		"theme-ui": "^0.11.1",
-		"web-vitals": "^1.1.2",
-		"webpack": "^5.75.0",
-		"worker-loader": "^3.0.8"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "graph-editor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@geoffcox/react-splitter": "^2.1.2",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@monaco-editor/react": "^4.2.2",
+    "@reduxjs/toolkit": "^1.6.1",
+    "react": "^16.14.0",
+    "react-digraph": "^8.1.0",
+    "react-dom": "^16.14.0",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.1",
+    "redux": "^4.1.1",
+    "web-vitals": "^3.1.1",
+    "webpack": "^5.75.0",
+    "worker-loader": "^3.0.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": []
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

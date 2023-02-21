@@ -1,130 +1,160 @@
-import { Row, Col } from "react-bootstrap";
-import MonacoEditor from "@monaco-editor/react";
-import { useResizeDetector } from "react-resize-detector";
-import usePyodide from "../../../hooks/use-pyodide";
-import {
-	forwardRef,
-	useImperativeHandle,
-	useEffect,
-	useState,
-	useCallback,
-} from "react";
-
-import { generateContext } from "../utils/editor-utils";
+import Editor from "@monaco-editor/react";
+import { useEffect, useState, useCallback } from "react";
+import { Split } from "@geoffcox/react-splitter";
+import EditorHeader from "./EditorHeader";
+import { useSelector, useDispatch } from "react-redux";
 import pythonGraphPath from "../python/graph.py";
+import boilerPlatePath from "../python/boilerplate.py";
+import { graphActions } from "../../../store/graph/graph";
+import classes from "../GraphEdtior.module.css";
+import { Box, CircularProgress } from "@material-ui/core";
+import OutputWindow from "./OutputWindow";
 
 const loadPythonCode = (path) => {
-	const load = async () => {
-		const r = await fetch(path);
-		const text = await r.text();
-		return text;
-	};
-	return load();
+  const load = async () => {
+    const r = await fetch(path);
+    const text = await r.text();
+    return text;
+  };
+  return load();
 };
 
-const Editor = forwardRef((props, ref) => {
-	// props
-	const {
-		animating,
-		onAnimate,
-		onChangeOutput,
-		onChangeCode,
-		onChangeIsEditorLoaded,
-		onChangeIsCodeStarted,
-		onChangeIsCodeFinished,
-	} = props;
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
-	// use pyodide hook
-	const {
-		animation,
-		isWorkerLoaded,
-		isCodeStarted,
-		isCodeFinished,
-		error,
-		output,
-		runCode,
-	} = usePyodide();
+const EditorWindow = (props) => {
+  const dispatch = useDispatch();
+  const nodes = useSelector((state) => state.graph.nodes);
+  const edges = useSelector((state) => state.graph.edges);
 
-	// initialization
-	const [pythonCode, setPythonCode] = useState("");
-	useEffect(() => {
-		loadPythonCode(pythonGraphPath).then((code) => {
-			setPythonCode(code);
-		});
-	}, []);
+  const animation = props.animation;
+  const animating = useSelector((state) => state.graph.animating);
+  const animationSpeed = useSelector((state) => state.graph.animationSpeed);
+  const { width, height, ref } = useResizeDetector();
+  const [boilerCode, setBoilerCode] = useState("");
+  const [code, setCode] = useState("");
+  const selectedAlgorithm = useSelector(
+    (state) => state.editor.selectedAlgorithm
+  );
+  const disabled = !props.isWorkerLoaded;
+  const algorithms = useSelector((state) => state.editor.algorithms);
+  const [pythonCode, setPythonCode] = useState("");
+  const [context, setContext] = useState();
 
-	// resizing of monaco editor dynamically
-	const { width, height, monacoRef } = useResizeDetector();
+  const animateHelper = useCallback(
+    async (ms) => {
+      // add reset current to the end of the animation
+      // to get rid of the current indicator
+      let animation_prime = [...animation, { type: "RESET_CURRENT" }];
+      for (let i = 0; i < animation_prime.length; i++) {
+        await sleep(ms);
+        dispatch(graphActions.animate(animation_prime[i]));
+      }
+    },
+    [animation, dispatch]
+  );
 
-	// monaco editor options
-	const options = {
-		minimap: {
-			enabled: false,
-		},
-	};
+  useEffect(() => {
+    if (animating) {
+      animateHelper((101 - animationSpeed) * 8);
+      dispatch(graphActions.finishAnimation());
+    }
+  }, [animating, animationSpeed, animateHelper, dispatch]);
 
-	// on change handlers
-	const onChangeCodeHandler = (event) => {
-		onChangeCode(event.target.value);
-	};
+  useEffect(() => {
+    loadPythonCode(boilerPlatePath).then((code) => {
+      setBoilerCode(code);
+    });
 
-	useEffect(() => {
-		onChangeOutput(output);
-	}, [output, onChangeOutput]);
+    loadPythonCode(pythonGraphPath).then((code) => {
+      setPythonCode(code);
+    });
+  }, []);
 
-	useEffect(() => {
-		onChangeIsEditorLoaded(isWorkerLoaded);
-	}, [isWorkerLoaded, onChangeIsEditorLoaded]);
+  useEffect(() => {
+    setCode(`${boilerCode}${algorithms[selectedAlgorithm].code}`);
+  }, [boilerCode, selectedAlgorithm, algorithms]);
 
-	useEffect(() => {
-		onChangeIsCodeStarted(isCodeStarted);
-	}, [isCodeStarted, onChangeIsCodeStarted]);
+  const changeCodeHandler = (code) => {
+    setCode(code);
+  };
 
-	useEffect(() => {
-		onChangeIsCodeFinished(isCodeFinished);
-	}, [isCodeFinished, onChangeIsCodeFinished]);
+  useEffect(() => {
+    let contextNodes = [];
+    let contextEdges = [];
+    let contextNodeIDs = [];
+    // construct map O(n)
+    let idMap = new Map();
+    nodes.forEach((value, idx, arr) => {
+      contextNodes.push(value.title);
+      contextNodeIDs.push(value.id);
+      idMap.set(value.id, value.title);
+    });
+    // set context O(m)
+    edges.forEach((value, idx, arr) => {
+      contextEdges.push([idMap.get(value.source), idMap.get(value.target)]);
+    });
+    setContext({
+      nodes: contextNodes,
+      edges: contextEdges,
+      node_ids: contextNodeIDs,
+    });
+  }, [nodes, edges]);
 
-	// call on animate function once the code has completed using an effect
+  const onRunPythonCode = async () => {
+    dispatch(graphActions.resetGraph());
+    props.runCode(`${pythonCode}\n\n${code}`, context);
+  };
 
-	useEffect(() => {
-		if (isWorkerLoaded && !isCodeStarted && isCodeFinished && !animating) {
-			onAnimate(animation);
-		}
-	}, [
-		animation,
-		isWorkerLoaded,
-		isCodeStarted,
-		isCodeFinished,
-		animating,
-		onAnimate,
-	]);
+  const options = {
+    minimap: {
+      enabled: false,
+    },
+  };
 
-	// allow us to trigger our run code from the edtior window component
-	useImperativeHandle(
-		ref,
-		() => ({
-			runEditorCode(code, nodes, edges) {
-				if (isWorkerLoaded && !isCodeStarted) {
-					runCode(`${pythonCode}\n\n${code}`, generateContext(nodes, edges));
-				}
-			},
-		}),
-		[isWorkerLoaded, isCodeStarted, pythonCode, runCode]
-	);
+  const renderSplitter = (props) => {
+    return <div className={classes.splitter}></div>;
+  };
 
-	return (
-		<div style={{ height: "100%", marginTop: "1px" }} ref={monacoRef}>
-			<MonacoEditor
-				defaultLanguage="python"
-				theme="vs-light"
-				width={width}
-				height={height}
-				value={props.code}
-				options={options}
-				onChange={onChangeCodeHandler}
-			/>
-		</div>
-	);
-});
+  return (
+    <>
+      <EditorHeader
+        onRunPythonCode={onRunPythonCode}
+        isWorkerLoaded={props.isWorkerLoaded}
+        isCodeFinished={props.isCodeFinished}
+      />
+      <Split
+        renderSplitter={renderSplitter}
+        splitterSize={"30px"}
+        initialPrimarySize="70%"
+        horizontal
+      >
+        <Editor
+          defaultLanguage="python"
+          theme="vs-light"
+          value={code}
+          options={options}
+          onChange={changeCodeHandler}
+        />
+        {!disabled ? (
+          <OutputWindow output={props.output} />
+        ) : (
+          <Box
+            sx={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress size={100} />
+          </Box>
+        )}
+      </Split>
+    </>
+  );
+};
 
-export default Editor;
+export default EditorWindow;

@@ -27,8 +27,7 @@ def bfs(visited, graph, node):
     while queue:
         s = queue.pop(0) 
         graph.setCurrentNode(s)
-        print (s, end = " ") 
-        
+        print(s)
         for neighbour in graph.getNeighbors(s):
             if neighbour not in visited:
                 graph.setCurrentEdge(s, neighbour)

@@ -17,6 +17,7 @@
     "redux": "^4.1.1",
     "web-vitals": "^3.1.1",
     "webpack": "^5.75.0",
+    "react-scripts": "^5.0.1",
     "worker-loader": "^3.0.8"
   },
   "scripts": {

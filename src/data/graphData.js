@@ -6,6 +6,7 @@ const graphData = [
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-simple-graph.png?alt=media&token=f947b0a3-5065-4265-bf80-506beb32dfb2",
     dataStructureType: "graph",
+    editable: true,
     graph: {
       nodes: [
         {
@@ -64,6 +65,7 @@ const graphData = [
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-complicated-graph.png?alt=media&token=74230be3-3ac4-4c78-a7cc-66b188207a0d",
     dataStructureType: "graph",
+    editable: true,
     graph: {
       nodes: [
         {
@@ -194,6 +196,7 @@ const graphData = [
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-simple-graph.png?alt=media&token=f947b0a3-5065-4265-bf80-506beb32dfb2",
     dataStructureType: "graph",
+    editable: true,
     graph: {
       nodes: [
         {
@@ -246,12 +249,13 @@ const graphData = [
     },
   },
   {
-    name: "A simple graph (4)",
-    slug: "a-simple-graph-4",
+    name: "A simple graph that is static",
+    slug: "a-simple-graph-that-is-static",
     description: "A simple graph with 4 nodes.",
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-simple-graph.png?alt=media&token=f947b0a3-5065-4265-bf80-506beb32dfb2",
     dataStructureType: "graph",
+    editable: false,
     graph: {
       nodes: [
         {
@@ -304,12 +308,13 @@ const graphData = [
     },
   },
   {
-    name: "A simple graph (5)",
-    slug: "a-simple-graph-5",
+    name: "A simple graph that is editable",
+    slug: "a-simple-graph-editable",
     description: "A simple graph with 4 nodes.",
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-simple-graph.png?alt=media&token=f947b0a3-5065-4265-bf80-506beb32dfb2",
     dataStructureType: "graph",
+    editable: true,
     graph: {
       nodes: [
         {
@@ -368,6 +373,7 @@ const graphData = [
     image:
       "https://firebasestorage.googleapis.com/v0/b/graph-editor-7e4ef.appspot.com/o/a-simple-graph.png?alt=media&token=f947b0a3-5065-4265-bf80-506beb32dfb2",
     dataStructureType: "graph",
+    editable: true,
     graph: {
       nodes: [
         {

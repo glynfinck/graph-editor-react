@@ -14,6 +14,7 @@ import {
   TableFooter,
   Box,
   IconButton,
+  Typography,
 } from "@material-ui/core";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
@@ -130,6 +131,7 @@ const GraphExplorer = () => {
               <TableCell>name</TableCell>
               <TableCell>type</TableCell>
               <TableCell>description</TableCell>
+              <TableCell>editable</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -142,6 +144,13 @@ const GraphExplorer = () => {
                 <TableCell align="left">{graph.name}</TableCell>
                 <TableCell align="left">{graph.dataStructureType}</TableCell>
                 <TableCell align="left">{graph.description}</TableCell>
+                <TableCell align="left">
+                  <Typography
+                    style={{ color: graph.editable ? "green" : "red" }}
+                  >
+                    {graph.editable ? "true" : "false"}
+                  </Typography>
+                </TableCell>
                 <TableCell align="right">
                   <Button onClick={() => onClickOpenGraph(graph.slug)}>
                     Open Graph

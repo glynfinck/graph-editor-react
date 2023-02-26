@@ -97,6 +97,8 @@ const GraphExplorer = () => {
   const [graphs, setGraphs] = useState(graphData.slice(0, 5));
   const history = useHistory();
 
+  const theme = useTheme();
+
   const onClickOpenGraph = (graphSlug) => {
     history.push(`/graphs/${graphSlug}`);
   };
@@ -146,7 +148,12 @@ const GraphExplorer = () => {
                 <TableCell align="left">{graph.description}</TableCell>
                 <TableCell align="left">
                   <Typography
-                    style={{ color: graph.editable ? "green" : "red" }}
+                    style={{
+                      fontWeight: "bold",
+                      color: graph.editable
+                        ? theme.palette.success.main
+                        : theme.palette.error.main,
+                    }}
                   >
                     {graph.editable ? "true" : "false"}
                   </Typography>

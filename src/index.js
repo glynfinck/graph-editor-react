@@ -7,13 +7,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@material-ui/core/styles";
-
-const theme = createTheme();
+import { ThemeProvider } from "@material-ui/core/styles";
+import { mainTheme } from "./themes/mainTheme";
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={mainTheme}>
     <Provider store={store}>
       <BrowserRouter>
         <App />

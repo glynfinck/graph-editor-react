@@ -30,6 +30,12 @@ The easiest way to use this application is to pull the docker image on [DockerHu
 docker pull glynfinck/graph-editor-react
 ```
 
+After pulling the image, run the following command and the application should be available at `localhost:80`:
+
+```
+docker run -p 80:80 -d glynfinck/graph-editor-react
+```
+
 ## Notes on Usage
 
 - The graph is treated as **un-directed** by default (no support for directed graph so far, this will be added in the future)

@@ -1,5 +1,5 @@
 # build environment
-FROM node:lts-alpine3.17@sha256:45748c3443410b052e2123dcffbd67838727394f9aacfd23e0b47afd95434ff5 as build
+FROM node:lts-alpine3.17@sha256:ffc770cdc09c9e83cccd99d663bb6ed56cfaa1bab94baf1b12b626aebeca9c10 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
@@ -10,7 +10,7 @@ COPY . ./
 RUN npm run build
 
 # production enviornment
-FROM nginx:stable-alpine@sha256:cc61d734c3045fa64f3d50173e5025e35e0074a29e24559e5ce085b844f6287d
+FROM nginx:stable-alpine@sha256:a9e4fce28ad7cc7de45772686a22dbeaeeb54758b16f25bf8f64ce33f3bff636
 COPY --from=build /app/build /usr/share/nginx/html
 # new
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
